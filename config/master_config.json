@@ -1,0 +1,875 @@
+{
+  "_meta_": "\ud83d\udd25 MASTER FLEET CONFIGURATION \ud83d\udd25",
+  "jobs": {
+    "10Limit": {
+      "groups": [
+        {
+          "id": -1003910386968,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "messages": [
+            "/like IND 2512117368",
+            "/like IND 3037405463",
+            "/like IND 5799545097"
+          ],
+          "active": true
+        },
+        {
+          "name": "Deepak",
+          "session": "deepak",
+          "messages": [
+            "/like IND 3037405463"
+          ],
+          "active": false
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "messages": [
+            "/like IND 1714257555"
+          ],
+          "active": false
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "messages": [
+            "/like IND 5799545097"
+          ],
+          "active": false
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "messages": [
+            "/like IND 8495643303"
+          ],
+          "active": false
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "messages": [
+            "/like IND 4354244058"
+          ],
+          "active": false
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "messages": [
+            "/like IND 1852353345",
+            "/like IND 1714257555"
+          ],
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "messages": [
+            "/like IND 8495643303",
+            "/like IND 4354244058",
+            "/like IND 9692973675"
+          ],
+          "active": true
+        }
+      ]
+    },
+    "4am": {
+      "groups": [
+        {
+          "id": -1003739609039,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like 1852353345",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/like 1714257555",
+          "active": true
+        },
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/like 2512117368",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/like 3037405463",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/like 5799545097",
+          "active": true
+        },
+        {
+          "name": "Santosh 2",
+          "session": "santosh2",
+          "message": "/like 2301409069",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/like 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/like 4354244058",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/like 9692973675",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "message": "/like 10333615213",
+          "active": true
+        }
+      ]
+    },
+    "4amOnly": {
+      "groups": [
+        {
+          "id": -1004303403000,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like 1852353345",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/like 1714257555",
+          "active": true
+        },
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/like 2512117368",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/like 3037405463",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/like 5799545097",
+          "active": true
+        },
+        {
+          "name": "Santosh 2",
+          "session": "santosh2",
+          "message": "/like 2301409069",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/like 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/like 4354244058",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/like 9692973675",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "message": "/like 10333615213",
+          "active": true
+        }
+      ]
+    },
+    "8am": {
+      "groups": [
+        {
+          "id": -1002876611334,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": -1002314979402,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": -1002483810359,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": -1002840420577,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": -1003836072457,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": -1003715420506,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/like IND 2512117368",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/like IND 9692973675",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/like IND 3037405463",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/like IND 1714257555",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/like IND 5799545097",
+          "active": true
+        },
+        {
+          "name": "Santosh 2",
+          "session": "santosh2",
+          "message": "/like IND 2301409069",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/like IND 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/like IND 4354244058",
+          "active": true
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like IND 1852353345",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "message": "/like IND 10333615213",
+          "active": true
+        }
+      ]
+    },
+    "8amLike": {
+      "groups": [
+        {
+          "id": -1003600109990,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/like 2512117368",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/like 9692973675",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/like 3037405463",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/like 1714257555",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/like 5799545097",
+          "active": true
+        },
+        {
+          "name": "Santosh 2",
+          "session": "santosh2",
+          "message": "/like 2301409069",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/like 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/like 4354244058",
+          "active": true
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like 1852353345",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "message": "/like 10333615213",
+          "active": true
+        }
+      ]
+    },
+    "dailyBonus": {
+      "groups": [
+        {
+          "id": "@PRINCE_REFER_BOT",
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        },
+        {
+          "id": "@FreeFireReferLikeBot",
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 3,
+        "wait_between_messages_sec_max": 5,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
+        }
+      ]
+    },
+    "info_bot": {
+      "groups": [
+        {
+          "id": -1003451378152,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 25,
+        "account_startup_delay_sec_max": 30
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/get 2512117368",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/get 3037405463",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/get 1714257555",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/get 5799545097",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/get 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/get 4354244058",
+          "active": true
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/get 1852353345",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/get 9692973675",
+          "active": true
+        }
+      ]
+    },
+    "MultipleLikes": {
+      "groups": [
+        {
+          "id": -1003739609039,
+          "solve_captcha": true,
+          "captcha_type": "all",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 60,
+        "wait_between_messages_sec_max": 60,
+        "wait_between_rounds_sec_min": 0,
+        "wait_between_rounds_sec_max": 0,
+        "take_long_break_after_x_messages": 999999,
+        "long_break_duration_sec_min": 0,
+        "long_break_duration_sec_max": 0,
+        "account_startup_delay_sec_min": 0,
+        "account_startup_delay_sec_max": 0
+      },
+      "accounts": [
+        {
+          "name": "Yogesh",
+          "session": "yogeshAnytime",
+          "messages": [
+            "/like 13097579217",
+            "/like 14188429051",
+            "/like 14188192422",
+            "/like 13092887388",
+            "/like 13085801074",
+            "/like 13100000895",
+            "/like 13101570833",
+            "/like 13105600701",
+            "/like 13124491107",
+            "/like 4354244058",
+            "/like 10550747776",
+            "/like 10329971058",
+            "/like 9679913084",
+            "/like 14341562377",
+            "/like 14341555696",
+            "/like 14195528094",
+            "/like 13625805723",
+            "/like 14195516670"
+          ],
+          "active": true
+        }
+      ]
+    },
+    "privateGroup": {
+      "groups": [
+        {
+          "id": -1002700686902,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 10,
+        "wait_between_messages_sec_max": 20,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 10,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 10,
+        "account_startup_delay_sec_max": 20
+      },
+      "accounts": [
+        {
+          "name": "Aman",
+          "session": "aman",
+          "message": "/like IND 2512117368",
+          "active": true
+        },
+        {
+          "name": "Ayush",
+          "session": "ayush",
+          "message": "/like IND 3037405463",
+          "active": true
+        },
+        {
+          "name": "Nitish2",
+          "session": "nitish2",
+          "message": "/like IND 1714257555",
+          "active": true
+        },
+        {
+          "name": "Santosh",
+          "session": "santosh",
+          "message": "/like IND 5799545097",
+          "active": true
+        },
+        {
+          "name": "Santosh 2",
+          "session": "santosh2",
+          "message": "/like IND 2301409069",
+          "active": true
+        },
+        {
+          "name": "Jay",
+          "session": "jay",
+          "message": "/like IND 8495643303",
+          "active": true
+        },
+        {
+          "name": "Pankaj",
+          "session": "pankaj",
+          "message": "/like IND 4354244058",
+          "active": true
+        },
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like IND 1852353345",
+          "active": true
+        },
+        {
+          "name": "Renu",
+          "session": "renu",
+          "message": "/like IND 9692973675",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "message": "/like IND 10333615213",
+          "active": true
+        }
+      ]
+    },
+    "testCaptcha_no_ind": {
+      "groups": [
+        {
+          "id": -1003739609039,
+          "solve_captcha": true,
+          "captcha_type": "all",
+          "active": true
+        },
+        {
+          "id": -1004303403000,
+          "solve_captcha": true,
+          "captcha_type": "all",
+          "active": true
+        },
+        {
+          "id": -1003600109990,
+          "solve_captcha": true,
+          "captcha_type": "all",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 30,
+        "wait_between_messages_sec_max": 30,
+        "wait_between_rounds_sec_min": 5,
+        "wait_between_rounds_sec_max": 10,
+        "take_long_break_after_x_messages": 9999,
+        "long_break_duration_sec_min": 0,
+        "long_break_duration_sec_max": 0,
+        "account_startup_delay_sec_min": 2,
+        "account_startup_delay_sec_max": 5
+      },
+      "accounts": [
+        {
+          "name": "Nitish1",
+          "session": "nitish1",
+          "message": "/like 10053791024",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogeshAnytime",
+          "message": "/like 16241701976",
+          "active": true
+        }
+      ]
+    },
+    "testCaptcha_ind": {
+      "groups": [
+        {
+          "id": -1003715420506,
+          "solve_captcha": true,
+          "captcha_type": "all",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 5,
+        "wait_between_messages_sec_max": 10,
+        "wait_between_rounds_sec_min": 5,
+        "wait_between_rounds_sec_max": 10,
+        "take_long_break_after_x_messages": 9999,
+        "long_break_duration_sec_min": 0,
+        "long_break_duration_sec_max": 0,
+        "account_startup_delay_sec_min": 2,
+        "account_startup_delay_sec_max": 5
+      },
+      "accounts": [
+        {
+          "name": "Santosh",
+          "session": "renu",
+          "message": "/like IND 1852353345",
+          "active": true
+        },
+        {
+          "name": "Yogesh",
+          "session": "yogeshAnytime",
+          "message": "/like IND 16241701976",
+          "active": false
+        }
+      ]
+    }
+  }
+}

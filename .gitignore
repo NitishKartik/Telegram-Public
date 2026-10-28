@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Device credentials directory
+credentials/*.json
+credentials/telegram_creds.json
+telegram_creds.json
+!credentials/README.md
+
+# Sessions & Data (Protect real session credentials from leaking)
+*.session
+*.session-journal
+Session/*.session
+data/sessions/*.session
+data/dead_sessions/*.session
+Dead/
+
+# Fleet Web Portal & Database (Reserved for local testing until fully ready)
+web/
+database/
+config/backups/
+config/portal_settings.json
+config/sync_targets.json
+
+# Local backups & testing scripts
+backups/
+cron-job/
+scripts/
+
+# Internal documentation & plans
+project_progress.md
+IMPLEMENTATION_PLAN.md
+AGENTS.md
+GEMINI.md
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log

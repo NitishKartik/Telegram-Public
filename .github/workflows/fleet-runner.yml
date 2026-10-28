@@ -1,0 +1,54 @@
+name: Telegram Fleet Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      config_target:
+        description: 'Which configuration job to run?'
+        required: true
+        default: '8am'
+        type: choice
+        options:
+          - 10Limit
+          - 4am
+          - 4amOnly
+          - 8am
+          - 8amLike
+          - dailyBonus
+          - info_bot
+          - MultipleLikes
+          - privateGroup
+          - testCaptcha_no_ind
+          - testCaptcha_ind
+
+jobs:
+  run-fleet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Restore Telegram Sessions
+        env:
+          SESSIONS_PART_1: ${{ secrets.SESSIONS_PART_1 }}
+          SESSIONS_PART_2: ${{ secrets.SESSIONS_PART_2 }}
+        run: |
+          python -m src.utils.session_unpack
+
+      - name: Execute Fleet Engine
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+        run: |
+          python main.py --time ${{ github.event.inputs.config_target }}
