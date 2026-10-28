@@ -603,49 +603,49 @@
         {
           "name": "Aman",
           "session": "aman",
-          "message": "/get 2512117368",
+          "message": "/level 2512117368",
           "active": true
         },
         {
           "name": "Ayush",
           "session": "ayush",
-          "message": "/get 3037405463",
+          "message": "/level 3037405463",
           "active": true
         },
         {
           "name": "Nitish2",
           "session": "nitish2",
-          "message": "/get 1714257555",
+          "message": "/level 1714257555",
           "active": true
         },
         {
           "name": "Santosh",
           "session": "santosh",
-          "message": "/get 5799545097",
+          "message": "/level 5799545097",
           "active": true
         },
         {
           "name": "Jay",
           "session": "jay",
-          "message": "/get 8495643303",
+          "message": "/level 8495643303",
           "active": true
         },
         {
           "name": "Pankaj",
           "session": "pankaj",
-          "message": "/get 4354244058",
+          "message": "/level 4354244058",
           "active": true
         },
         {
           "name": "Nitish1",
           "session": "nitish1",
-          "message": "/get 1852353345",
+          "message": "/level 1852353345",
           "active": true
         },
         {
           "name": "Renu",
           "session": "renu",
-          "message": "/get 9692973675",
+          "message": "/level 9692973675",
           "active": true
         }
       ]
