@@ -12,13 +12,13 @@ Maintained by **Nitish Kartik**.
 ## 🏗️ Production Architecture
 
 ```text
-Telegram/
+Telegram-Public/
 ├── .github/workflows/
 │   └── fleet-runner.yml          <- Cloud execution via GitHub Actions
 ├── config/
-│   ├── master_config.json        <- Multi-job scheduled targets & humanization
-│   ├── permissions.json
-│   └── target_groups.json
+│   └── master_config.json        <- Multi-job scheduled targets & humanization
+├── credentials/
+│   └── README.md                 <- Device credentials & security guide
 ├── data/
 │   ├── sessions/                 <- Store .session files (Protected by .gitignore)
 │   └── dead_sessions/            <- Quarantined banned or expired sessions
@@ -30,9 +30,9 @@ Telegram/
 │   │   ├── captcha.py            <- Math & inline button captcha solver
 │   │   └── runner.py             <- Fleet runner with FloodWait recovery
 │   └── utils/
-│       └── logger.py             <- Cross-platform logging utility
-├── scripts/
-│   └── auto_referral.py          <- Interactive CLI referral tool
+│       ├── logger.py             <- Cross-platform logging utility
+│       ├── session_unpack.py     <- Decodes session bundles from GitHub Secrets
+│       └── terminal_ui.py        <- Terminal cards & progress UI
 ├── .env.example                  <- Credentials template
 ├── .gitignore                    <- Security barrier
 ├── requirements.txt              <- Dependencies
@@ -69,8 +69,8 @@ python main.py --time 8am
 ### B. Android (Termux)
 ```bash
 pkg update && pkg install python git
-git clone https://github.com/NitishKartik/Telegram.git
-cd Telegram
+git clone https://github.com/NitishKartik/Telegram-Public.git
+cd Telegram-Public
 pip install -r requirements.txt
 export TELEGRAM_API_ID="your_api_id"
 export TELEGRAM_API_HASH="your_api_hash"

@@ -54,35 +54,28 @@ This framework solves these challenges through:
 Below is the production-grade directory layout:
 
 ```text
-Telegram/
+Telegram-Public/
 ├── .github/
 │   └── workflows/
 │       └── fleet-runner.yml          # Cloud CI/CD automation workflow
 ├── config/
-│   ├── master_config.json            # Central fleet configuration & scheduled jobs
-│   ├── permissions.json              # Access control & privileges
-│   └── target_groups.json            # Target group list for quick scripts
+│   └── master_config.json            # Central fleet configuration & scheduled jobs
 ├── credentials/
 │   ├── README.md                     # Security & usage guidelines
 │   └── telegram_creds.json           # [IGNORED IN GIT] Local device credentials
 ├── data/
 │   ├── sessions/                     # [IGNORED IN GIT] Active .session files
 │   └── dead_sessions/                # Quarantined / expired session files
-├── scripts/
-│   └── auto_referral.py              # Interactive terminal referral dispatcher
 ├── src/
-│   ├── __init__.py
 │   ├── config.py                     # Path-independent config & credential resolver
 │   ├── core/
-│   │   ├── __init__.py
 │   │   └── stats.py                  # Fleet telemetry, metrics, and progress bars
 │   ├── engines/
-│   │   ├── __init__.py
 │   │   ├── captcha.py                # Math & button challenge solver
 │   │   └── runner.py                 # Core asynchronous fleet execution worker
 │   └── utils/
-│       ├── __init__.py
 │       ├── logger.py                 # Structured file & stream logging
+│       ├── session_unpack.py         # Session bundle decoding from GitHub Secrets
 │       └── terminal_ui.py            # Visual, mobile-compatible terminal cards
 ├── .env.example                      # Template for environment variables
 ├── .gitignore                        # Security filter preventing credential leaks
@@ -96,7 +89,7 @@ Telegram/
 
 ## Chapter 3: Credential Architecture & The Fallback Engine
 
-The system employs a **3-tier hierarchical credential resolver** in [`src/config.py`](file:///d:/Projects/GitHub%20Projects/Telegram/src/config.py):
+The system employs a **3-tier hierarchical credential resolver** in [`src/config.py`](src/config.py):
 
 ```
 +-------------------------------------------------------------+
@@ -120,7 +113,7 @@ The system employs a **3-tier hierarchical credential resolver** in [`src/config
 ```
 
 ### The Security Guarantee
-The file [`.gitignore`](file:///d:/Projects/GitHub%20Projects/Telegram/.gitignore) contains:
+The file [`.gitignore`](.gitignore) contains:
 ```gitignore
 credentials/*.json
 credentials/telegram_creds.json
@@ -133,7 +126,7 @@ Even if you push commits or publish your repository publicly, **your local crede
 
 ## Chapter 4: The Master Configuration Manual (`master_config.json`)
 
-The entire operational fleet is configured inside [`config/master_config.json`](file:///d:/Projects/GitHub%20Projects/Telegram/config/master_config.json).
+The entire operational fleet is configured inside [`config/master_config.json`](config/master_config.json).
 
 ### 4.1 Root & Job Envelope
 
@@ -285,7 +278,7 @@ Open PowerShell or Antigravity Terminal:
 
 ```powershell
 # 1. Navigate to repository
-cd "d:\Projects\GitHub Projects\Telegram"
+cd Telegram-Public
 
 # 2. Run your target job
 py main.py --time testCaptcha_no_ind
@@ -303,8 +296,8 @@ py main.py --time testCaptcha_no_ind
    ```
 2. **Clone & Setup:**
    ```bash
-   git clone https://github.com/NitishKartik/Telegram.git
-   cd Telegram
+   git clone https://github.com/NitishKartik/Telegram-Public.git
+   cd Telegram-Public
    pip install -r requirements.txt
    ```
 3. **Configure Local Credentials:**
