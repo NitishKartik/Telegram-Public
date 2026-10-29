@@ -37,6 +37,7 @@ cron-job/
 scripts/
 
 # Internal documentation & plans
+SETUP.md
 project_progress.md
 IMPLEMENTATION_PLAN.md
 AGENTS.md

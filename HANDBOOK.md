@@ -21,16 +21,12 @@
 5. [Chapter 5: The Captcha Engine Manual](#chapter-5-the-captcha-engine-manual)
    - [5.1 Solving Modes & Parameters](#51-solving-modes--parameters)
    - [5.2 Dual-Engine Strategy (Listener vs. Poller)](#52-dual-engine-strategy-listener-vs-poller)
-6. [Chapter 6: Cross-Platform Execution Guide](#chapter-6-cross-platform-execution-guide)
-   - [6.1 Running on Windows](#61-running-on-windows)
-   - [6.2 Running on Android via Termux](#62-running-on-android-via-termux)
-   - [6.3 Running in GitHub Actions (Cloud Serverless)](#63-running-in-github-actions-cloud-serverless)
-7. [Chapter 7: Practical Field Recipes & Use Case Blueprints](#chapter-7-practical-field-recipes--use-case-blueprints)
+6. [Chapter 6: Practical Field Recipes & Use Case Blueprints](#chapter-6-practical-field-recipes--use-case-blueprints)
    - [Recipe A: Ultra-Fast Captcha Benchmark](#recipe-a-ultra-fast-captcha-benchmark)
    - [Recipe B: Multi-UID Like Campaign (Sequential Routing)](#recipe-b-multi-uid-like-campaign-sequential-routing)
    - [Recipe C: Stealth Ghost Mode Campaign](#recipe-c-stealth-ghost-mode-campaign)
    - [Recipe D: 24/7 Daily Bonus Harvester](#recipe-d-247-daily-bonus-harvester)
-8. [Chapter 8: Diagnostics, FloodWait Recovery, & Troubleshooting](#chapter-8-diagnostics-floodwait-recovery--troubleshooting)
+7. [Chapter 7: Diagnostics, FloodWait Recovery, & Troubleshooting](#chapter-7-diagnostics-floodwait-recovery--troubleshooting)
 
 ---
 
@@ -270,67 +266,7 @@ Telegram bots often deliver captchas via two different delivery mechanisms:
 
 ---
 
-## Chapter 6: Cross-Platform Execution Guide
-
-### 6.1 Running on Windows
-
-Open PowerShell or Antigravity Terminal:
-
-```powershell
-# 1. Navigate to repository
-cd Telegram-Public
-
-# 2. Run your target job
-py main.py --time testCaptcha_no_ind
-```
-
-*Note: Windows automatically loads UTF-8 output modes and ASCII card framing to prevent `cp1252` encoding exceptions.*
-
----
-
-### 6.2 Running on Android via Termux
-
-1. **Install Prerequisites:**
-   ```bash
-   pkg update -y && pkg install -y python git libjpeg-turbo
-   ```
-2. **Clone & Setup:**
-   ```bash
-   git clone https://github.com/NitishKartik/Telegram-Public.git
-   cd Telegram-Public
-   pip install -r requirements.txt
-   ```
-3. **Configure Local Credentials:**
-   ```bash
-   cat <<EOF > credentials/telegram_creds.json
-   {
-     "api_id": 1234567,
-     "api_hash": "abcdef0123456789abcdef0123456789"
-   }
-   EOF
-   ```
-4. **Copy Sessions:**
-   Place your `.session` files into `data/sessions/`.
-5. **Execute:**
-   ```bash
-   python main.py --time testCaptcha_no_ind
-   ```
-
----
-
-### 6.3 Running in GitHub Actions (Cloud Serverless)
-
-1. Open your GitHub Repository in your web browser.
-2. Navigate to: **Settings $\rightarrow$ Secrets and variables $\rightarrow$ Actions**.
-3. Add Repository Secrets:
-   - `TELEGRAM_API_ID`: `1234567`
-   - `TELEGRAM_API_HASH`: `abcdef0123456789abcdef0123456789`
-4. Under the **Actions** tab, select **Telegram Fleet Runner**.
-5. Click **Run workflow**, choose your target job from the dropdown menu (e.g. `testCaptcha_no_ind` or `8am`), and click **Run workflow**.
-
----
-
-## Chapter 7: Practical Field Recipes & Use Case Blueprints
+## Chapter 6: Practical Field Recipes & Use Case Blueprints
 
 ### Recipe A: Ultra-Fast Captcha Benchmark
 
@@ -447,7 +383,7 @@ py main.py --time testCaptcha_no_ind
 
 ---
 
-## Chapter 8: Diagnostics, FloodWait Recovery, & Troubleshooting
+## Chapter 7: Diagnostics, FloodWait Recovery, & Troubleshooting
 
 ### 1. `FloodWaitError: A wait of X seconds is required`
 - **Root Cause:** Telegram's server-side rate limits have been triggered by excessive request volume.
