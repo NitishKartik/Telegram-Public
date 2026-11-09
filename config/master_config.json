@@ -1,5 +1,5 @@
 {
-  "_meta_": "\ud83d\udd25 MASTER FLEET CONFIGURATION \ud83d\udd25",
+  "_meta_": "🔥 MASTER FLEET CONFIGURATION 🔥",
   "jobs": {
     "10Limit": {
       "groups": [
@@ -596,8 +596,8 @@
         "take_long_break_after_x_messages": 10,
         "long_break_duration_sec_min": 90,
         "long_break_duration_sec_max": 120,
-        "account_startup_delay_sec_min": 25,
-        "account_startup_delay_sec_max": 30
+        "account_startup_delay_sec_min": 2,
+        "account_startup_delay_sec_max": 5
       },
       "accounts": [
         {
@@ -868,6 +868,21 @@
           "session": "yogeshAnytime",
           "message": "/like IND 16241701976",
           "active": false
+        }
+      ]
+    },
+    "like_report": {
+      "type": "report",
+      "description": "Daily likes summary report for all tracked UIDs",
+      "output_dir": "data/reports",
+      "send_telegram": true,
+      "sender_account": "Nitish1",
+      "groups": [
+        {
+          "id": -1003451378152,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
         }
       ]
     }

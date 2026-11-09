@@ -16,6 +16,7 @@ on:
           - 8amLike
           - dailyBonus
           - info_bot
+          - like_report
           - MultipleLikes
           - privateGroup
           - testCaptcha_no_ind
@@ -24,6 +25,9 @@ on:
 jobs:
   run-fleet:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -39,6 +43,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Restore Like History
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m src.utils.history_artifacts restore
+
       - name: Restore Telegram Sessions
         env:
           SESSIONS_PART_1: ${{ secrets.SESSIONS_PART_1 }}
@@ -52,3 +62,19 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
         run: |
           python main.py --time ${{ github.event.inputs.config_target }}
+
+      - name: Save Like History Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: like-history
+          path: data/like_history.json
+          retention-days: 90
+
+      - name: Upload Like Reports
+        if: always() && github.event.inputs.config_target == 'like_report'
+        uses: actions/upload-artifact@v4
+        with:
+          name: like-reports
+          path: data/reports/
+          retention-days: 90

@@ -3,10 +3,13 @@ Telegram Bot Fleet Master Execution Engine
 Cross-platform support: Android (Termux), Linux / GitHub Actions, and Windows.
 """
 import asyncio
+import json
 import os
 import sys
 import argparse
 import random
+import re
+from datetime import datetime
 from pathlib import Path
 
 # Guarantee root directory is in sys.path
@@ -30,25 +33,86 @@ from src.config import (
     load_json_config
 )
 from src.core.stats import BotStats
+from src.core.like_history import IST, daily_uid_summary, load_history
 from src.engines.runner import send_from_account
-from src.utils.terminal_ui import log_header, log_job_info
+from src.utils.terminal_ui import log_header, log_job_info, log_like_daily_summary
 
 async def main():
     parser = argparse.ArgumentParser(description="🚀 Run the Telegram Bot Fleet")
-    parser.add_argument("--time", type=str, required=True, help="Target Job (e.g., 4am, 8am, testCaptcha_no_ind)")
+    parser.add_argument("--time", type=str, required=False, help="Target Job (e.g., 4am, 8am, info_bot, like_report)")
     parser.add_argument("--config", type=str, default="master_config.json", help="Path to config file")
+    parser.add_argument("--summary", nargs="?", const="today", help="Show daily likes summary table (e.g., --summary or --summary 2026-11-09)")
+    parser.add_argument("--show", type=str, help="Show stored history for a UID (e.g., --show 1852353345)")
+    parser.add_argument("--send", type=str, help="Send guarded /level query using nitish1 session (e.g., --send 1852353345)")
+    parser.add_argument("--report", nargs="?", const="today", help="Generate likes report markdown & JSON files (e.g., --report)")
+    parser.add_argument("--telegram", action="store_true", help="Send generated report directly into Telegram group")
     args = parser.parse_args()
+
+    # Handle direct utility flags first
+    if args.summary is not None:
+        selected_day = datetime.now(IST).date().isoformat() if args.summary == "today" else args.summary
+        daily = daily_uid_summary(load_history(), selected_day)
+        log_like_daily_summary(selected_day, daily)
+        return
+
+    if args.show:
+        if not re.fullmatch(r"\d+", args.show):
+            print("❌ Error: UID must contain digits only")
+            sys.exit(1)
+        data = load_history()
+        uid_data = data.get("uids", {}).get(args.show)
+        if uid_data is None:
+            print(f"⚠️ UID {args.show} not found in history.")
+        else:
+            print(json.dumps(uid_data, indent=2))
+        return
+
+    if args.report is not None:
+        from src.core.like_report import generate_report, send_report_telegram
+        selected_day = None if args.report == "today" else args.report
+        report = generate_report({"output_dir": "data/reports"}, day=selected_day)
+        if getattr(args, "telegram", False):
+            try:
+                cfg = load_json_config(get_config_path(args.config))
+                job_cfg = cfg.get("jobs", {}).get("like_report", {})
+            except Exception:
+                job_cfg = {}
+            await send_report_telegram(report, job_cfg)
+        return
+
+    if args.send:
+        if not re.fullmatch(r"\d+", args.send):
+            print("❌ Error: UID must contain digits only")
+            sys.exit(1)
+        from src.engines.level_query import send_level
+        from src.core.like_history import extract_likes, extract_player_name, record_likes, HISTORY_PATH
+        from src.utils.terminal_ui import log_like_result
+        try:
+            reply, message_id = await send_level(args.send)
+            likes = extract_likes(reply)
+            player_name = extract_player_name(reply)
+            entry = record_likes(args.send, likes, player_name=player_name)
+            log_like_result(
+                "Nitish1",
+                args.send,
+                likes,
+                entry.get("change_from_previous_recorded_day"),
+                player_name=entry.get("player_name"),
+                added_since_prev=entry.get("change_from_previous_observation"),
+            )
+            print(f"Saved {HISTORY_PATH}")
+        except Exception as e:
+            print(f"❌ Error sending /level {args.send}: {e}")
+            sys.exit(1)
+        return
+
+    if not args.time:
+        parser.print_help()
+        sys.exit(1)
 
     time_slot = args.time
     config_file = get_config_path(args.config)
     sessions_dir = get_sessions_dir()
-
-    log_header("TELEGRAM BOT FLEET ENGINE", "Multi-Device • Anti-Ban • Captcha Solver")
-
-    if not API_ID or not API_HASH:
-        print("❌ Error: Missing Telegram credentials!")
-        print("   Add them to `credentials/telegram_creds.json` or export TELEGRAM_API_ID / TELEGRAM_API_HASH.")
-        sys.exit(1)
 
     try:
         full_data = load_json_config(config_file)
@@ -63,6 +127,20 @@ async def main():
         sys.exit(1)
 
     data = full_data["jobs"][time_slot]
+
+    if time_slot == "like_report" or data.get("type") == "report":
+        from src.core.like_report import generate_report, send_report_telegram
+        report = generate_report(data)
+        if data.get("send_telegram") or data.get("groups"):
+            await send_report_telegram(report, data)
+        return
+
+    log_header("TELEGRAM BOT FLEET ENGINE", "Multi-Device • Anti-Ban • Captcha Solver")
+
+    if not API_ID or not API_HASH:
+        print("❌ Error: Missing Telegram credentials!")
+        print("   Add them to `credentials/telegram_creds.json` or export TELEGRAM_API_ID / TELEGRAM_API_HASH.")
+        sys.exit(1)
 
     raw_groups = data.get("groups", [])
     target_groups = []
@@ -96,6 +174,15 @@ async def main():
     if not target_groups or not active_accounts:
         print("⚠️ No active targets or accounts found for this job!")
         sys.exit(1)
+
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        from src.utils.schedule_guard import check_cron_window, check_public_workflows
+        try:
+            check_cron_window()
+            check_public_workflows()
+        except Exception as guard_error:
+            print(f"❌ Local session safety check failed: {guard_error}")
+            sys.exit(1)
 
     delay_info = f"{hz_config['wait_between_messages_sec_min']}s - {hz_config['wait_between_messages_sec_max']}s"
     log_job_info(time_slot, len(active_accounts), len(target_groups), repeat_count, delay_info)
@@ -134,11 +221,26 @@ async def main():
             stats_tracker=stats_tracker,
             api_id=API_ID,
             api_hash=API_HASH,
-            initial_delay=current_stagger
+            initial_delay=current_stagger,
+            track_level_replies=(time_slot == "info_bot"),
         ))
 
-    await asyncio.gather(*tasks)
+    tracked_results = await asyncio.gather(*tasks)
     stats_tracker.print_stats()
+    if time_slot == "info_bot":
+        expected = 0
+        for acc in active_accounts:
+            raw = acc.get("messages", acc.get("message", ""))
+            messages = raw if isinstance(raw, list) else [raw]
+            expected += sum(
+                bool(re.fullmatch(r"/level\s+\d+", str(message).strip()))
+                for message in messages
+            )
+        expected *= len(target_groups) * repeat_count
+        tracked = sum(result or 0 for result in tracked_results)
+        today = datetime.now(IST).date().isoformat()
+        daily = daily_uid_summary(load_history(), today)
+        log_like_daily_summary(today, daily, captured=tracked, expected=expected)
 
 if __name__ == "__main__":
     if sys.platform == "win32":

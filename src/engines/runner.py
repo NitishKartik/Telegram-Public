@@ -9,12 +9,15 @@ from telethon.errors import FloodWaitError, UserBannedInChannelError, ChatWriteF
 
 from src.engines.captcha import process_captcha
 from src.core.stats import print_progress_bar, BotStats
+from src.core.like_history import extract_player_name, record_likes
+from src.engines.level_query import wait_for_level_reply
 from src.utils.terminal_ui import (
     log_account_connect,
     log_send_success,
     log_send_error,
     log_flood_wait,
-    log_human_break
+    log_human_break,
+    log_like_result,
 )
 
 async def ghost_delete(client: TelegramClient, chat_id: Any, msg_id: int, delay: int = 120):
@@ -49,7 +52,8 @@ async def send_from_account(
     stats_tracker: BotStats,
     api_id: int,
     api_hash: str,
-    initial_delay: float = 0.0
+    initial_delay: float = 0.0,
+    track_level_replies: bool = False,
 ):
     """
     Fleet worker executing humanized message dispatches for a single account.
@@ -70,6 +74,7 @@ async def send_from_account(
     captcha_enabled_real_ids = set()
     chat_titles: Dict[int, str] = {}
     chat_captcha_types: Dict[int, str] = {}
+    tracked_count = 0
 
     try:
         client = TelegramClient(str(session_path), api_id, api_hash)
@@ -170,6 +175,34 @@ async def send_from_account(
                             stats_tracker.add_success(account_name)
                             log_send_success(account_name, group_label, msg)
 
+                            if track_level_replies:
+                                level_match = re.fullmatch(r"/level\s+(\d+)", str(msg).strip())
+                                if level_match:
+                                    uid = level_match.group(1)
+                                    try:
+                                        likes, reply = await wait_for_level_reply(
+                                            client, real_chat_id, sent_msg.id, uid
+                                        )
+                                        observed_at = reply.edit_date or reply.date
+                                        player_name = extract_player_name(reply.raw_text)
+                                        entry = record_likes(uid, likes, observed_at, player_name=player_name)
+                                        tracked_count += 1
+                                        daily_change = entry.get("change_from_previous_recorded_day")
+                                        added_since_prev = entry.get("change_from_previous_observation")
+                                        log_like_result(
+                                            account_name,
+                                            uid,
+                                            likes,
+                                            daily_change,
+                                            player_name=entry.get("player_name"),
+                                            added_since_prev=added_since_prev,
+                                        )
+                                    except Exception as track_error:
+                                        print(
+                                            f"\n  ⚠️ [{account_name}] UID {uid} likes not recorded: "
+                                            f"{track_error}"
+                                        )
+
                             if is_ghost:
                                 t = asyncio.create_task(ghost_delete(client, real_chat_id, sent_msg.id, delay=120))
                                 ghost_tasks.append(t)
@@ -223,3 +256,4 @@ async def send_from_account(
     finally:
         if client:
             await client.disconnect()
+    return tracked_count
