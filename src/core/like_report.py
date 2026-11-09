@@ -142,7 +142,7 @@ def render_telegram_message(report: dict) -> str:
     return "\n".join(lines).strip()
 
 
-async def send_report_telegram(report: dict, settings: dict) -> list[int]:
+async def send_report_telegram(report: dict, settings: dict, force: bool = False) -> list[int]:
     """Send formatted like report card into configured Telegram groups."""
     from telethon import TelegramClient
     from src.config import API_ID, API_HASH, get_sessions_dir
@@ -150,7 +150,7 @@ async def send_report_telegram(report: dict, settings: dict) -> list[int]:
     if not API_ID or not API_HASH:
         raise RuntimeError("Telegram API credentials missing")
 
-    if os.environ.get("GITHUB_ACTIONS") != "true":
+    if os.environ.get("GITHUB_ACTIONS") != "true" and not force:
         from src.utils.schedule_guard import check_cron_window, check_public_workflows
         check_cron_window()
         check_public_workflows()

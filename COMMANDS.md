@@ -77,6 +77,7 @@ Compares each UID's current likes against their previous recorded date. Saves re
 python main.py --report               # Generate report for today (files + terminal table)
 python main.py --report 2026-11-09    # Generate report for specific date
 python main.py --report --telegram    # Generate report AND send Card View into Info Bot group
+python main.py --report --telegram --force # Send to Telegram bypassing cron schedule lock
 python main.py --time like_report     # Runs via master_config.json job (files + Telegram group)
 ```
 

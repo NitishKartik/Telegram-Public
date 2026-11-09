@@ -42,13 +42,14 @@ async def wait_for_level_reply(client, group_id: int, sent_id: int,
     raise TimeoutError(f"No completed /level reply for UID {uid} within {timeout_seconds}s")
 
 
-async def send_level(uid: str, timeout_seconds: int = 120) -> tuple[str, int]:
+async def send_level(uid: str, timeout_seconds: int = 120, force: bool = False) -> tuple[str, int]:
     from telethon import TelegramClient
 
     if not API_ID or not API_HASH:
         raise RuntimeError("Telegram API credentials are missing")
-    check_cron_window()
-    check_public_workflows()
+    if not force:
+        check_cron_window()
+        check_public_workflows()
     session = get_sessions_dir() / "nitish1.session"
     if not session.is_file():
         raise FileNotFoundError(session)

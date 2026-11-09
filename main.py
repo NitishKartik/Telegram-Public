@@ -46,6 +46,7 @@ async def main():
     parser.add_argument("--send", type=str, help="Send guarded /level query using nitish1 session (e.g., --send 1852353345)")
     parser.add_argument("--report", nargs="?", const="today", help="Generate likes report markdown & JSON files (e.g., --report)")
     parser.add_argument("--telegram", action="store_true", help="Send generated report directly into Telegram group")
+    parser.add_argument("--force", action="store_true", help="Bypass cron schedule safety checks for local manual testing")
     args = parser.parse_args()
 
     # Handle direct utility flags first
@@ -77,7 +78,12 @@ async def main():
                 job_cfg = cfg.get("jobs", {}).get("like_report", {})
             except Exception:
                 job_cfg = {}
-            await send_report_telegram(report, job_cfg)
+            try:
+                await send_report_telegram(report, job_cfg, force=args.force)
+            except RuntimeError as e:
+                print(f"\n🛡️ Safety check prevented Telegram send: {e}")
+                print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
+                sys.exit(1)
         return
 
     if args.send:
@@ -88,7 +94,7 @@ async def main():
         from src.core.like_history import extract_likes, extract_player_name, record_likes, HISTORY_PATH
         from src.utils.terminal_ui import log_like_result
         try:
-            reply, message_id = await send_level(args.send)
+            reply, message_id = await send_level(args.send, force=args.force)
             likes = extract_likes(reply)
             player_name = extract_player_name(reply)
             entry = record_likes(args.send, likes, player_name=player_name)
@@ -132,7 +138,12 @@ async def main():
         from src.core.like_report import generate_report, send_report_telegram
         report = generate_report(data)
         if data.get("send_telegram") or data.get("groups"):
-            await send_report_telegram(report, data)
+            try:
+                await send_report_telegram(report, data, force=getattr(args, "force", False))
+            except RuntimeError as e:
+                print(f"\n🛡️ Safety check prevented Telegram send: {e}")
+                print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
+                sys.exit(1)
         return
 
     log_header("TELEGRAM BOT FLEET ENGINE", "Multi-Device • Anti-Ban • Captcha Solver")
@@ -175,13 +186,14 @@ async def main():
         print("⚠️ No active targets or accounts found for this job!")
         sys.exit(1)
 
-    if os.environ.get("GITHUB_ACTIONS") != "true":
+    if os.environ.get("GITHUB_ACTIONS") != "true" and not getattr(args, "force", False):
         from src.utils.schedule_guard import check_cron_window, check_public_workflows
         try:
             check_cron_window()
             check_public_workflows()
         except Exception as guard_error:
             print(f"❌ Local session safety check failed: {guard_error}")
+            print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
             sys.exit(1)
 
     delay_info = f"{hz_config['wait_between_messages_sec_min']}s - {hz_config['wait_between_messages_sec_max']}s"
