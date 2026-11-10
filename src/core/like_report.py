@@ -35,6 +35,7 @@ def build_report(history: dict, day: str) -> dict:
             "observed_at": current.get("observed_at") if current else None,
             "previous_recorded_day": prior_day,
             "previous_likes": prior["likes"] if prior else None,
+            "last_fetched_likes": entry.get("previous_likes") if entry.get("previous_likes") is not None else (prior["likes"] if prior else None),
             "increase_since_previous_record": increase,
             "comparison_days": interval,
             "daily_increase": increase if current and interval == 1 else None,
@@ -122,7 +123,7 @@ def render_telegram_message(report: dict) -> str:
         name = row.get("player_name") or "—"
         likes = row.get("likes")
         likes_str = f"{likes:,}" if likes is not None else "—"
-        prev_likes = row.get("previous_likes")
+        prev_likes = row.get("last_fetched_likes") if row.get("last_fetched_likes") is not None else row.get("previous_likes")
         prev_likes_str = f"{prev_likes:,}" if prev_likes is not None else "—"
 
         delta = row.get("daily_increase")
