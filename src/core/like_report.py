@@ -1,5 +1,6 @@
 """Read saved likes history and produce a separate daily report for every UID."""
 
+import html
 import json
 import os
 from datetime import date, datetime
@@ -124,6 +125,7 @@ def render_telegram_message(report: dict) -> str:
     if not time_str:
         time_str = datetime.now(like_history.IST).strftime("%I:%M %p")
 
+    BORDER = "──────────────────────────────"
     header_parts = ["LIKE INFORMATION REPORT"]
     if day:
         header_parts.append(day)
@@ -132,13 +134,14 @@ def render_telegram_message(report: dict) -> str:
 
     lines = [
         " • ".join(header_parts),
-        "",
+        BORDER,
     ]
     uids = report.get("uids", {})
     if not uids:
         lines.append("⚠️ No UIDs tracked in history.")
     for uid, row in uids.items():
         name = row.get("player_name") or "—"
+        safe_name = html.escape(name)
         likes = row.get("likes")
         likes_str = f"{likes:,}" if likes is not None else "—"
         prev_likes = row.get("last_fetched_likes") if row.get("last_fetched_likes") is not None else row.get("previous_likes")
@@ -152,29 +155,30 @@ def render_telegram_message(report: dict) -> str:
         else:
             delta_str = "0"
 
-        tag = row.get("telegram_username") or "—"
-        if tag != "—" and not tag.startswith("@"):
-            tag = f"@{tag}"
-        tg_name = row.get("telegram_name")
-        if tg_name and tag != "—":
-            tag_label = f"{tg_name} ({tag})"
-        elif tag != "—":
-            tag_label = tag
+        username = (row.get("telegram_username") or "").lstrip("@").strip()
+        tg_name = (row.get("telegram_name") or "").strip()
+
+        if tg_name and username and username != "—":
+            safe_tg_name = html.escape(tg_name)
+            tag_label = f'<a href="https://t.me/{username}">{safe_tg_name}</a>'
         elif tg_name:
-            tag_label = tg_name
+            tag_label = html.escape(tg_name)
+        elif username and username != "—":
+            safe_user = html.escape(username)
+            tag_label = f'<a href="https://t.me/{username}">@{safe_user}</a>'
         else:
             tag_label = "—"
 
         lines.extend([
             "┌ Like Info",
             f"├─ UID: {uid}",
-            f"├─ Nickname: {name}",
+            f"├─ Nickname: {safe_name}",
             f"├─ Last Fetched Likes: {prev_likes_str}",
             f"├─ Latest Fetched Likes: {likes_str}",
             f"├─ Added Likes Today: {delta_str}",
             f"├─ Current Total Likes: {likes_str}",
             f"└─ {tag_label}",
-            "",
+            BORDER,
         ])
 
     return "\n".join(lines).strip()
@@ -221,7 +225,7 @@ async def send_report_telegram(report: dict, settings: dict, force: bool = False
         if not await client.is_user_authorized():
             raise RuntimeError(f"Session {session_path.name} is no longer authorized")
         for gid in target_group_ids:
-            sent = await client.send_message(int(gid), text)
+            sent = await client.send_message(int(gid), text, parse_mode="html")
             print(f"📬 [Like Report] Dispatched report to group {gid} (Message ID: {sent.id})")
             sent_ids.append(sent.id)
 

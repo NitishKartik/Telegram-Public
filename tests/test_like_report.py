@@ -96,6 +96,7 @@ class LikeReportTests(unittest.TestCase):
         }, "2026-11-09")
         msg = like_report.render_telegram_message(report)
         self.assertIn("LIKE INFORMATION REPORT • 2026-11-09 • ", msg)
+        self.assertIn("──────────────────────────────", msg)
         self.assertIn("┌ Like Info", msg)
         self.assertIn("├─ UID: 1852353345", msg)
         self.assertIn("├─ Nickname: Ƙᴀɪᴅɪ⁷⁸⁶", msg)
@@ -103,7 +104,7 @@ class LikeReportTests(unittest.TestCase):
         self.assertIn("├─ Latest Fetched Likes: 126,181", msg)
         self.assertIn("├─ Added Likes Today: +115", msg)
         self.assertIn("├─ Current Total Likes: 126,181", msg)
-        self.assertIn("└─ Nitish Kartik (@nitish1201)", msg)
+        self.assertIn('└─ <a href="https://t.me/nitish1201">Nitish Kartik</a>', msg)
 
 
 if __name__ == "__main__":
