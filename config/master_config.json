@@ -99,14 +99,15 @@
       "groups": [
         {
           "id": -1003739609039,
-          "solve_captcha": false,
-          "captcha_type": "none",
+          "solve_captcha": true,
+          "captcha_type": "all",
           "active": true
         }
       ],
       "repeat_count": 1,
       "humanization_settings": {
         "show_typing_status": true,
+        "captcha_wait_seconds": 15,
         "wait_between_messages_sec_min": 10,
         "wait_between_messages_sec_max": 20,
         "wait_between_rounds_sec_min": 15,
@@ -184,14 +185,15 @@
       "groups": [
         {
           "id": -1004303403000,
-          "solve_captcha": false,
-          "captcha_type": "none",
+          "solve_captcha": true,
+          "captcha_type": "all",
           "active": true
         }
       ],
       "repeat_count": 1,
       "humanization_settings": {
         "show_typing_status": true,
+        "captcha_wait_seconds": 15,
         "wait_between_messages_sec_min": 10,
         "wait_between_messages_sec_max": 20,
         "wait_between_rounds_sec_min": 15,

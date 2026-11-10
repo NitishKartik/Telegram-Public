@@ -116,7 +116,7 @@ async def main():
         parser.print_help()
         sys.exit(1)
 
-    time_slot = args.time
+    time_slots = [s.strip() for s in args.time.split(",") if s.strip()]
     config_file = get_config_path(args.config)
     sessions_dir = get_sessions_dir()
 
@@ -126,133 +126,135 @@ async def main():
         print(f"❌ Error: {e}")
         sys.exit(1)
 
-    if "jobs" not in full_data or time_slot not in full_data["jobs"]:
-        print(f"❌ Error: Job '{time_slot}' not found inside {config_file.name}")
-        available_jobs = list(full_data.get("jobs", {}).keys())
-        print(f"   Available: {', '.join(available_jobs)}")
-        sys.exit(1)
-
-    data = full_data["jobs"][time_slot]
-
-    if time_slot == "like_report" or data.get("type") == "report":
-        from src.core.like_report import generate_report, send_report_telegram
-        report = generate_report(data)
-        if data.get("send_telegram") or data.get("groups"):
-            try:
-                await send_report_telegram(report, data, force=getattr(args, "force", False))
-            except RuntimeError as e:
-                print(f"\n🛡️ Safety check prevented Telegram send: {e}")
-                print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
-                sys.exit(1)
-        return
-
-    log_header("TELEGRAM BOT FLEET ENGINE", "Multi-Device • Anti-Ban • Captcha Solver")
-
-    if not API_ID or not API_HASH:
-        print("❌ Error: Missing Telegram credentials!")
-        print("   Add them to `credentials/telegram_creds.json` or export TELEGRAM_API_ID / TELEGRAM_API_HASH.")
-        sys.exit(1)
-
-    raw_groups = data.get("groups", [])
-    target_groups = []
-
-    for g in raw_groups:
-        if isinstance(g, dict):
-            if g.get("active", True):
-                target_groups.append(g)
-        else:
-            target_groups.append({"id": g, "solve_captcha": True, "ghost_mode": False})
-
-    accounts_data = data.get("accounts", [])
-    repeat_count = data.get("repeat_count", 1)
-    hz_data = data.get("humanization_settings", {})
-
-    hz_config = {
-        "show_typing_status": hz_data.get("show_typing_status", True),
-        "wait_between_messages_sec_min": hz_data.get("wait_between_messages_sec_min", 15),
-        "wait_between_messages_sec_max": hz_data.get("wait_between_messages_sec_max", 30),
-        "wait_between_rounds_sec_min": hz_data.get("wait_between_rounds_sec_min", 30),
-        "wait_between_rounds_sec_max": hz_data.get("wait_between_rounds_sec_max", 50),
-        "take_long_break_after_x_messages": hz_data.get("take_long_break_after_x_messages", 50),
-        "long_break_duration_sec_min": hz_data.get("long_break_duration_sec_min", 180),
-        "long_break_duration_sec_max": hz_data.get("long_break_duration_sec_max", 300),
-        "account_startup_delay_sec_min": hz_data.get("account_startup_delay_sec_min", 2),
-        "account_startup_delay_sec_max": hz_data.get("account_startup_delay_sec_max", 5)
-    }
-
-    active_accounts = [acc for acc in accounts_data if acc.get("active", True)]
-
-    if not target_groups or not active_accounts:
-        print("⚠️ No active targets or accounts found for this job!")
-        sys.exit(1)
-
-    if os.environ.get("GITHUB_ACTIONS") != "true" and not getattr(args, "force", False):
-        from src.utils.schedule_guard import check_cron_window, check_public_workflows
-        try:
-            check_cron_window()
-            check_public_workflows()
-        except Exception as guard_error:
-            print(f"❌ Local session safety check failed: {guard_error}")
-            print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
+    for time_slot in time_slots:
+        if "jobs" not in full_data or time_slot not in full_data["jobs"]:
+            print(f"❌ Error: Job '{time_slot}' not found inside {config_file.name}")
+            available_jobs = list(full_data.get("jobs", {}).keys())
+            print(f"   Available: {', '.join(available_jobs)}")
             sys.exit(1)
 
-    delay_info = f"{hz_config['wait_between_messages_sec_min']}s - {hz_config['wait_between_messages_sec_max']}s"
-    log_job_info(time_slot, len(active_accounts), len(target_groups), repeat_count, delay_info)
+        data = full_data["jobs"][time_slot]
 
-    stats_tracker = BotStats()
-    tasks = []
-    current_stagger = 0.0
+        if time_slot == "like_report" or data.get("type") == "report":
+            from src.core.like_report import generate_report, send_report_telegram
+            report = generate_report(data)
+            if data.get("send_telegram") or data.get("groups"):
+                try:
+                    await send_report_telegram(report, data, force=getattr(args, "force", False))
+                except RuntimeError as e:
+                    print(f"\n🛡️ Safety check prevented Telegram send: {e}")
+                    print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
+                    sys.exit(1)
+            continue
 
-    for idx, acc in enumerate(active_accounts):
-        session_name = acc["session"]
-        if not session_name.endswith(".session"):
-            session_name += ".session"
+        log_header("TELEGRAM BOT FLEET ENGINE", f"Job: {time_slot} • Anti-Ban • Captcha Solver")
 
-        session_path = sessions_dir / session_name
-        if not session_path.exists():
-            legacy_path = PROJECT_ROOT / "Session" / session_name
-            if legacy_path.exists():
-                session_path = legacy_path
+        if not API_ID or not API_HASH:
+            print("❌ Error: Missing Telegram credentials!")
+            print("   Add them to `credentials/telegram_creds.json` or export TELEGRAM_API_ID / TELEGRAM_API_HASH.")
+            sys.exit(1)
 
-        if idx > 0:
-            current_stagger += random.uniform(
-                hz_config["account_startup_delay_sec_min"],
-                hz_config["account_startup_delay_sec_max"]
-            )
+        raw_groups = data.get("groups", [])
+        target_groups = []
 
-        raw_msg = acc.get("messages", acc.get("message", ""))
-        msg_list = raw_msg if isinstance(raw_msg, list) else [raw_msg]
+        for g in raw_groups:
+            if isinstance(g, dict):
+                if g.get("active", True):
+                    target_groups.append(g)
+            else:
+                target_groups.append({"id": g, "solve_captcha": True, "ghost_mode": False})
 
-        tasks.append(send_from_account(
-            account_name=acc["name"],
-            session_path=session_path,
-            msg_list=msg_list,
-            target_groups=target_groups,
-            repeat_count=repeat_count,
-            hz_config=hz_config,
-            stats_tracker=stats_tracker,
-            api_id=API_ID,
-            api_hash=API_HASH,
-            initial_delay=current_stagger,
-            track_level_replies=(time_slot == "info_bot"),
-        ))
+        accounts_data = data.get("accounts", [])
+        repeat_count = data.get("repeat_count", 1)
+        hz_data = data.get("humanization_settings", {})
 
-    tracked_results = await asyncio.gather(*tasks)
-    stats_tracker.print_stats()
-    if time_slot == "info_bot":
-        expected = 0
-        for acc in active_accounts:
-            raw = acc.get("messages", acc.get("message", ""))
-            messages = raw if isinstance(raw, list) else [raw]
-            expected += sum(
-                bool(re.fullmatch(r"/level\s+\d+", str(message).strip()))
-                for message in messages
-            )
-        expected *= len(target_groups) * repeat_count
-        tracked = sum(result or 0 for result in tracked_results)
-        today = datetime.now(IST).date().isoformat()
-        daily = daily_uid_summary(load_history(), today)
-        log_like_daily_summary(today, daily, captured=tracked, expected=expected)
+        hz_config = {
+            "show_typing_status": hz_data.get("show_typing_status", True),
+            "captcha_wait_seconds": hz_data.get("captcha_wait_seconds", 30),
+            "wait_between_messages_sec_min": hz_data.get("wait_between_messages_sec_min", 15),
+            "wait_between_messages_sec_max": hz_data.get("wait_between_messages_sec_max", 30),
+            "wait_between_rounds_sec_min": hz_data.get("wait_between_rounds_sec_min", 30),
+            "wait_between_rounds_sec_max": hz_data.get("wait_between_rounds_sec_max", 50),
+            "take_long_break_after_x_messages": hz_data.get("take_long_break_after_x_messages", 50),
+            "long_break_duration_sec_min": hz_data.get("long_break_duration_sec_min", 180),
+            "long_break_duration_sec_max": hz_data.get("long_break_duration_sec_max", 300),
+            "account_startup_delay_sec_min": hz_data.get("account_startup_delay_sec_min", 2),
+            "account_startup_delay_sec_max": hz_data.get("account_startup_delay_sec_max", 5)
+        }
+
+        active_accounts = [acc for acc in accounts_data if acc.get("active", True)]
+
+        if not target_groups or not active_accounts:
+            print(f"⚠️ No active targets or accounts found for job '{time_slot}'!")
+            continue
+
+        if os.environ.get("GITHUB_ACTIONS") != "true" and not getattr(args, "force", False):
+            from src.utils.schedule_guard import check_cron_window, check_public_workflows
+            try:
+                check_cron_window()
+                check_public_workflows()
+            except Exception as guard_error:
+                print(f"❌ Local session safety check failed: {guard_error}")
+                print(f"   (Use --force to bypass safety checks if you are certain no remote fleet runs are active)\n")
+                sys.exit(1)
+
+        delay_info = f"{hz_config['wait_between_messages_sec_min']}s - {hz_config['wait_between_messages_sec_max']}s"
+        log_job_info(time_slot, len(active_accounts), len(target_groups), repeat_count, delay_info)
+
+        stats_tracker = BotStats()
+        tasks = []
+        current_stagger = 0.0
+
+        for idx, acc in enumerate(active_accounts):
+            session_name = acc["session"]
+            if not session_name.endswith(".session"):
+                session_name += ".session"
+
+            session_path = sessions_dir / session_name
+            if not session_path.exists():
+                legacy_path = PROJECT_ROOT / "Session" / session_name
+                if legacy_path.exists():
+                    session_path = legacy_path
+
+            if idx > 0:
+                current_stagger += random.uniform(
+                    hz_config["account_startup_delay_sec_min"],
+                    hz_config["account_startup_delay_sec_max"]
+                )
+
+            raw_msg = acc.get("messages", acc.get("message", ""))
+            msg_list = raw_msg if isinstance(raw_msg, list) else [raw_msg]
+
+            tasks.append(send_from_account(
+                account_name=acc["name"],
+                session_path=session_path,
+                msg_list=msg_list,
+                target_groups=target_groups,
+                repeat_count=repeat_count,
+                hz_config=hz_config,
+                stats_tracker=stats_tracker,
+                api_id=API_ID,
+                api_hash=API_HASH,
+                initial_delay=current_stagger,
+                track_level_replies=(time_slot == "info_bot"),
+            ))
+
+        tracked_results = await asyncio.gather(*tasks)
+        stats_tracker.print_stats()
+        if time_slot == "info_bot":
+            expected = 0
+            for acc in active_accounts:
+                raw = acc.get("messages", acc.get("message", ""))
+                messages = raw if isinstance(raw, list) else [raw]
+                expected += sum(
+                    bool(re.fullmatch(r"/level\s+\d+", str(message).strip()))
+                    for message in messages
+                )
+            expected *= len(target_groups) * repeat_count
+            tracked = sum(result or 0 for result in tracked_results)
+            today = datetime.now(IST).date().isoformat()
+            daily = daily_uid_summary(load_history(), today)
+            log_like_daily_summary(today, daily, captured=tracked, expected=expected)
 
 if __name__ == "__main__":
     if sys.platform == "win32":

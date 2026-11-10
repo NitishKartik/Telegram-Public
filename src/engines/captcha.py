@@ -70,31 +70,34 @@ async def process_captcha(
                     clean_btn = re.sub(r'[^\d\-]', '', button.text or "")
                     if clean_btn == str(result):
                         try:
-                            await button.click()
-                            solved_captchas.add(msg_obj.id)
-                            log_captcha_solved(account_name, group_name, f"{num1} {operator} {num2} = {result}", source)
-                            clicked = True
+                            res = await button.click()
+                            cb_msg = getattr(res, 'message', '') or ''
+                            if getattr(res, 'alert', False) and ("expired" in cb_msg.lower() or "not for you" in cb_msg.lower()):
+                                pass
+                            else:
+                                solved_captchas.add(msg_obj.id)
+                                log_text = f"{num1} {operator} {num2} = {result}"
+                                if cb_msg:
+                                    log_text += f" [{cb_msg}]"
+                                log_captcha_solved(account_name, group_name, log_text, source)
+                                clicked = True
                         except Exception:
                             pass
                         break
                 if clicked: 
                     break
             
-            if not clicked and captcha_type_norm == "all":
-                try:
-                    await msg_obj.click(0)
-                    solved_captchas.add(msg_obj.id)
-                    log_captcha_solved(account_name, group_name, "Button fallback clicked", source)
-                except Exception:
-                    pass
-            return True
+            return clicked
 
     # 2. Universal / Verification Button Solving
     elif msg_obj.buttons and captcha_type_norm in ("all", "button"):
         try:
-            await msg_obj.click(0)
+            res = await msg_obj.click(0)
+            cb_msg = getattr(res, 'message', '') or ''
+            if getattr(res, 'alert', False) and ("expired" in cb_msg.lower() or "not for you" in cb_msg.lower()):
+                return False
             solved_captchas.add(msg_obj.id)
-            log_captcha_solved(account_name, group_name, "Universal Verification Button", source)
+            log_captcha_solved(account_name, group_name, f"Universal Verification Button [{cb_msg}]" if cb_msg else "Universal Verification Button", source)
             return True
         except Exception:
             pass

@@ -69,6 +69,7 @@ async def send_from_account(
 
     client = None
     solved_captchas = set()
+    account_solved_event = asyncio.Event()
     chat_min_ids = {}
     ghost_tasks = []
     captcha_enabled_real_ids = set()
@@ -79,10 +80,13 @@ async def send_from_account(
     try:
         client = TelegramClient(str(session_path), api_id, api_hash)
 
-        async def active_sleep(duration: float):
+        async def active_sleep(duration: float, stop_on_solve: bool = False):
             poll_interval = 2.0
             elapsed = 0.0
             while elapsed < duration:
+                if stop_on_solve and account_solved_event.is_set():
+                    await asyncio.sleep(8.0)
+                    break
                 step = min(poll_interval, duration - elapsed)
                 await asyncio.sleep(step)
                 elapsed += step
@@ -98,11 +102,13 @@ async def send_from_account(
                         g_name = chat_titles.get(real_chat_id, str(real_chat_id))
                         c_type = chat_captcha_types.get(real_chat_id, "all")
                         async for msg_obj in client.iter_messages(real_chat_id, limit=3, min_id=min_id):
-                            await process_captcha(
+                            solved = await process_captcha(
                                 msg_obj, extracted_ff_uids, solved_captchas,
                                 account_name, group_name=g_name, source="Poller",
                                 captcha_type=c_type
                             )
+                            if solved:
+                                account_solved_event.set()
                     except Exception:
                         pass
 
@@ -114,11 +120,13 @@ async def send_from_account(
             try:
                 g_name = chat_titles.get(event.chat_id, str(event.chat_id))
                 c_type = chat_captcha_types.get(event.chat_id, "all")
-                await process_captcha(
+                solved = await process_captcha(
                     event, extracted_ff_uids, solved_captchas,
                     account_name, group_name=g_name, source="Instant",
                     captcha_type=c_type
                 )
+                if solved:
+                    account_solved_event.set()
             except Exception as e:
                 err_str = str(e)
                 if "Message ID is invalid" not in err_str and "GetBotCallbackAnswerRequest" not in err_str:
@@ -246,7 +254,27 @@ async def send_from_account(
                                 await active_sleep(msg_delay)
 
             if captcha_enabled_real_ids:
-                await active_sleep(15)
+                captcha_wait = float(hz_config.get("captcha_wait_seconds", 15))
+                await active_sleep(captcha_wait, stop_on_solve=True)
+
+                # Final Sweep: If not solved, perform a sweep over recent messages to catch delayed bot challenges
+                if not account_solved_event.is_set():
+                    for real_chat_id in list(captcha_enabled_real_ids):
+                        try:
+                            g_name = chat_titles.get(real_chat_id, str(real_chat_id))
+                            c_type = chat_captcha_types.get(real_chat_id, "all")
+                            async for msg_obj in client.iter_messages(real_chat_id, limit=10):
+                                solved = await process_captcha(
+                                    msg_obj, extracted_ff_uids, solved_captchas,
+                                    account_name, group_name=g_name, source="Sweep",
+                                    captcha_type=c_type
+                                )
+                                if solved:
+                                    account_solved_event.set()
+                                    await asyncio.sleep(2.0)
+                                    break
+                        except Exception:
+                            pass
 
             if ghost_tasks:
                 await asyncio.gather(*ghost_tasks)
