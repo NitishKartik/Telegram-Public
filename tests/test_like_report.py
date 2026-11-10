@@ -94,7 +94,7 @@ class LikeReportTests(unittest.TestCase):
             }
         }, "2026-11-09")
         msg = like_report.render_telegram_message(report)
-        self.assertIn("LIKE INFORMATION REPORT", msg)
+        self.assertIn("LIKE INFORMATION REPORT • 2026-11-09 • ", msg)
         self.assertIn("┌ Like Info", msg)
         self.assertIn("├─ UID: 1852353345", msg)
         self.assertIn("├─ Nickname: Ƙᴀɪᴅɪ⁷⁸⁶", msg)

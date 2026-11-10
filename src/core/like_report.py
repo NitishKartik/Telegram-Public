@@ -112,8 +112,25 @@ def generate_report(settings: dict, day: str | None = None) -> dict:
 def render_telegram_message(report: dict) -> str:
     """Render mobile-friendly card-view Telegram message in Option A format."""
     day = report.get("date", "")
+    time_str = ""
+    gen_raw = report.get("generated_at")
+    if gen_raw:
+        try:
+            dt = datetime.fromisoformat(gen_raw).astimezone(like_history.IST)
+            time_str = dt.strftime("%I:%M %p")
+        except Exception:
+            pass
+    if not time_str:
+        time_str = datetime.now(like_history.IST).strftime("%I:%M %p")
+
+    header_parts = ["LIKE INFORMATION REPORT"]
+    if day:
+        header_parts.append(day)
+    if time_str:
+        header_parts.append(time_str)
+
     lines = [
-        f"LIKE INFORMATION REPORT • {day}",
+        " • ".join(header_parts),
         "",
     ]
     uids = report.get("uids", {})
