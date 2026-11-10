@@ -86,6 +86,7 @@ class LikeReportTests(unittest.TestCase):
                 "1852353345": {
                     "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
                     "telegram_username": "@nitish1201",
+                    "telegram_name": "Nitish Kartik",
                     "daily": {
                         "2026-11-08": sample(126066, "2026-11-08"),
                         "2026-11-09": sample(126181, "2026-11-09"),
@@ -102,7 +103,7 @@ class LikeReportTests(unittest.TestCase):
         self.assertIn("├─ Latest Fetched Likes: 126,181", msg)
         self.assertIn("├─ Added Likes Today: +115", msg)
         self.assertIn("├─ Current Total Likes: 126,181", msg)
-        self.assertIn("└─ @nitish1201", msg)
+        self.assertIn("└─ Nitish Kartik (@nitish1201)", msg)
 
 
 if __name__ == "__main__":

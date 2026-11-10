@@ -148,6 +148,9 @@ async def send_from_account(
         me = await client.get_me()
         user_info = me.first_name if me else ""
         tg_username = f"@{me.username}" if (me and getattr(me, "username", None)) else None
+        tg_name = f"{getattr(me, 'first_name', '') or ''} {getattr(me, 'last_name', '') or ''}".strip() if me else None
+        if not tg_name and account_name:
+            tg_name = account_name
         log_account_connect(account_name, user_info)
 
         total_iterations = repeat_count * len(target_groups) * len(msg_list)
@@ -200,6 +203,7 @@ async def send_from_account(
                                             observed_at,
                                             player_name=player_name,
                                             telegram_username=tg_username,
+                                            telegram_name=tg_name,
                                         )
                                         tracked_count += 1
                                         daily_change = entry.get("change_from_previous_recorded_day")

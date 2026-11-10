@@ -31,6 +31,7 @@ def build_report(history: dict, day: str) -> dict:
         rows[uid] = {
             "player_name": entry.get("player_name") or (current.get("player_name") if current else None) or "—",
             "telegram_username": entry.get("telegram_username") or (current.get("telegram_username") if current else None) or "—",
+            "telegram_name": entry.get("telegram_name") or (current.get("telegram_name") if current else None) or None,
             "likes": current["likes"] if current else None,
             "observed_at": current.get("observed_at") if current else None,
             "previous_recorded_day": prior_day,
@@ -154,6 +155,15 @@ def render_telegram_message(report: dict) -> str:
         tag = row.get("telegram_username") or "—"
         if tag != "—" and not tag.startswith("@"):
             tag = f"@{tag}"
+        tg_name = row.get("telegram_name")
+        if tg_name and tag != "—":
+            tag_label = f"{tg_name} ({tag})"
+        elif tag != "—":
+            tag_label = tag
+        elif tg_name:
+            tag_label = tg_name
+        else:
+            tag_label = "—"
 
         lines.extend([
             "┌ Like Info",
@@ -163,7 +173,7 @@ def render_telegram_message(report: dict) -> str:
             f"├─ Latest Fetched Likes: {likes_str}",
             f"├─ Added Likes Today: {delta_str}",
             f"├─ Current Total Likes: {likes_str}",
-            f"└─ {tag}",
+            f"└─ {tag_label}",
             "",
         ])
 

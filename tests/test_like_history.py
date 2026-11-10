@@ -104,19 +104,22 @@ class LikeHistoryTests(unittest.IsolatedAsyncioTestCase):
                     "999", 500,
                     datetime.fromisoformat("2026-11-10T03:15:00+05:30"),
                     player_name="TestHero",
-                    telegram_username="@testhero"
+                    telegram_username="@testhero",
+                    telegram_name="Hero Account"
                 )
                 data = like_history.load_history()
                 self.assertIn("2026-11-09", data["uids"]["999"]["daily"])
                 self.assertNotIn("2026-11-10", data["uids"]["999"]["daily"])
                 self.assertEqual(data["uids"]["999"]["daily"]["2026-11-09"]["likes"], 500)
+                self.assertEqual(data["uids"]["999"]["telegram_name"], "Hero Account")
 
                 # 05:15 AM check opening new operational day Nov 10
                 like_history.record_likes(
                     "999", 555,
                     datetime.fromisoformat("2026-11-10T05:15:00+05:30"),
                     player_name="TestHero",
-                    telegram_username="@testhero"
+                    telegram_username="@testhero",
+                    telegram_name="Hero Account"
                 )
                 data = like_history.load_history()
                 self.assertIn("2026-11-10", data["uids"]["999"]["daily"])
