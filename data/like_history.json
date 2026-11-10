@@ -10,18 +10,26 @@
           "added_since_previous_observation": 115,
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null
+        },
+        "2026-11-10": {
+          "likes": 126185,
+          "observed_at": "2026-11-10T03:33:46+05:30",
+          "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
+          "added_since_previous_observation": 4,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 4
         }
       },
       "latest": {
-        "likes": 126181,
-        "observed_at": "2026-11-09T17:19:00.787386+05:30",
+        "likes": 126185,
+        "observed_at": "2026-11-10T03:33:46+05:30",
         "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶"
       },
-      "change_from_previous_observation": 115,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
+      "change_from_previous_observation": 4,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 4,
       "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
-      "previous_likes": 126066
+      "previous_likes": 126181
     },
     "2512117368": {
       "daily": {
@@ -31,17 +39,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ＦＣ✿Sʜᴀᴅoω࿐"
+        },
+        "2026-11-10": {
+          "likes": 34623,
+          "observed_at": "2026-11-10T03:33:27+05:30",
+          "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
+          "added_since_previous_observation": 4,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 4
         }
       },
       "latest": {
-        "likes": 34619,
-        "observed_at": "2026-11-09T11:06:49+05:30",
+        "likes": 34623,
+        "observed_at": "2026-11-10T03:33:27+05:30",
         "player_name": "ＦＣ✿Sʜᴀᴅoω࿐"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "ＦＣ✿Sʜᴀᴅoω࿐"
+      "change_from_previous_observation": 4,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 4,
+      "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
+      "previous_likes": 34619
     },
     "3037405463": {
       "daily": {
@@ -51,17 +68,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "MᴏᴍᴏsCʜᴏʀ"
+        },
+        "2026-11-10": {
+          "likes": 13422,
+          "observed_at": "2026-11-10T03:33:31+05:30",
+          "player_name": "MᴏᴍᴏsCʜᴏʀ",
+          "added_since_previous_observation": 0,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 0
         }
       },
       "latest": {
         "likes": 13422,
-        "observed_at": "2026-11-09T11:07:16+05:30",
+        "observed_at": "2026-11-10T03:33:31+05:30",
         "player_name": "MᴏᴍᴏsCʜᴏʀ"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "MᴏᴍᴏsCʜᴏʀ"
+      "change_from_previous_observation": 0,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 0,
+      "player_name": "MᴏᴍᴏsCʜᴏʀ",
+      "previous_likes": 13422
     },
     "1714257555": {
       "daily": {
@@ -71,17 +97,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ALWAYSﾠR6"
+        },
+        "2026-11-10": {
+          "likes": 32418,
+          "observed_at": "2026-11-10T03:33:34+05:30",
+          "player_name": "ALWAYSﾠR6",
+          "added_since_previous_observation": 0,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 0
         }
       },
       "latest": {
         "likes": 32418,
-        "observed_at": "2026-11-09T11:07:51+05:30",
+        "observed_at": "2026-11-10T03:33:34+05:30",
         "player_name": "ALWAYSﾠR6"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "ALWAYSﾠR6"
+      "change_from_previous_observation": 0,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 0,
+      "player_name": "ALWAYSﾠR6",
+      "previous_likes": 32418
     },
     "5799545097": {
       "daily": {
@@ -91,17 +126,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™"
+        },
+        "2026-11-10": {
+          "likes": 14263,
+          "observed_at": "2026-11-10T03:33:38+05:30",
+          "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
+          "added_since_previous_observation": 0,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 0
         }
       },
       "latest": {
         "likes": 14263,
-        "observed_at": "2026-11-09T11:08:11+05:30",
+        "observed_at": "2026-11-10T03:33:38+05:30",
         "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™"
+      "change_from_previous_observation": 0,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 0,
+      "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
+      "previous_likes": 14263
     },
     "8495643303": {
       "daily": {
@@ -111,17 +155,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "༱ㅤℓαꪜㅤ"
+        },
+        "2026-11-10": {
+          "likes": 33349,
+          "observed_at": "2026-11-10T03:33:41+05:30",
+          "player_name": "༱ㅤℓαꪜㅤ",
+          "added_since_previous_observation": 3,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 3
         }
       },
       "latest": {
-        "likes": 33346,
-        "observed_at": "2026-11-09T11:08:36+05:30",
+        "likes": 33349,
+        "observed_at": "2026-11-10T03:33:41+05:30",
         "player_name": "༱ㅤℓαꪜㅤ"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "༱ㅤℓαꪜㅤ"
+      "change_from_previous_observation": 3,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 3,
+      "player_name": "༱ㅤℓαꪜㅤ",
+      "previous_likes": 33346
     },
     "4354244058": {
       "daily": {
@@ -131,17 +184,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "MissCrime271"
+        },
+        "2026-11-10": {
+          "likes": 23849,
+          "observed_at": "2026-11-10T03:33:44+05:30",
+          "player_name": "MissCrime271",
+          "added_since_previous_observation": 0,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 0
         }
       },
       "latest": {
         "likes": 23849,
-        "observed_at": "2026-11-09T11:09:04+05:30",
+        "observed_at": "2026-11-10T03:33:44+05:30",
         "player_name": "MissCrime271"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "MissCrime271"
+      "change_from_previous_observation": 0,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 0,
+      "player_name": "MissCrime271",
+      "previous_likes": 23849
     },
     "9692973675": {
       "daily": {
@@ -151,17 +213,26 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "?★Sᗩᑭᑎᗩ★?"
+        },
+        "2026-11-10": {
+          "likes": 14740,
+          "observed_at": "2026-11-10T03:33:50+05:30",
+          "player_name": "?★Sᗩᑭᑎᗩ★?",
+          "added_since_previous_observation": 2,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 2
         }
       },
       "latest": {
-        "likes": 14738,
-        "observed_at": "2026-11-09T11:10:00+05:30",
+        "likes": 14740,
+        "observed_at": "2026-11-10T03:33:50+05:30",
         "player_name": "?★Sᗩᑭᑎᗩ★?"
       },
-      "change_from_previous_observation": null,
-      "previous_recorded_day": null,
-      "change_from_previous_recorded_day": null,
-      "player_name": "?★Sᗩᑭᑎᗩ★?"
+      "change_from_previous_observation": 2,
+      "previous_recorded_day": "2026-11-09",
+      "change_from_previous_recorded_day": 2,
+      "player_name": "?★Sᗩᑭᑎᗩ★?",
+      "previous_likes": 14738
     }
   }
 }
