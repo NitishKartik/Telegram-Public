@@ -30,6 +30,7 @@ def build_report(history: dict, day: str) -> dict:
             status = "gap"
         rows[uid] = {
             "player_name": entry.get("player_name") or (current.get("player_name") if current else None) or "—",
+            "telegram_username": entry.get("telegram_username") or (current.get("telegram_username") if current else None) or "—",
             "likes": current["likes"] if current else None,
             "observed_at": current.get("observed_at") if current else None,
             "previous_recorded_day": prior_day,
@@ -108,11 +109,11 @@ def generate_report(settings: dict, day: str | None = None) -> dict:
 
 
 def render_telegram_message(report: dict) -> str:
-    """Render mobile-friendly card-view Telegram Markdown message."""
+    """Render mobile-friendly card-view Telegram message in Option A format."""
     day = report.get("date", "")
     lines = [
-        f"📊 **DAILY LIKES REPORT • {day} (IST)**",
-        "─────────────────────────────",
+        f"LIKE INFORMATION REPORT • {day}",
+        "",
     ]
     uids = report.get("uids", {})
     if not uids:
@@ -121,24 +122,33 @@ def render_telegram_message(report: dict) -> str:
         name = row.get("player_name") or "—"
         likes = row.get("likes")
         likes_str = f"{likes:,}" if likes is not None else "—"
-        status_type = row.get("status")
-        delta = row.get("increase_since_previous_record")
+        prev_likes = row.get("previous_likes")
+        prev_likes_str = f"{prev_likes:,}" if prev_likes is not None else "—"
 
-        if status_type == "baseline":
-            status_text = "First recorded day"
-        elif status_type == "missing_today":
-            status_text = "❌ Missing today"
-        elif status_type == "gap":
-            status_text = f"📈 {delta:+,} (over {row.get('comparison_days')}d)"
+        delta = row.get("daily_increase")
+        if delta is None:
+            delta = row.get("increase_since_previous_record")
+        if delta is not None:
+            delta_str = f"+{delta:,}" if delta > 0 else f"{delta:,}"
         else:
-            status_text = f"📈 Daily {delta:+,}"
+            delta_str = "0"
 
-        lines.append(f"👤 **{name}** (`{uid}`)")
-        lines.append(f"   • **Likes**: `{likes_str}` | {status_text}")
-        lines.append("")
+        tag = row.get("telegram_username") or "—"
+        if tag != "—" and not tag.startswith("@"):
+            tag = f"@{tag}"
 
-    lines.append("─────────────────────────────")
-    lines.append("📁 _Generated & archived automatically._")
+        lines.extend([
+            "┌ Like Info",
+            f"├─ UID: {uid}",
+            f"├─ Nickname: {name}",
+            f"├─ Last Fetched Likes: {prev_likes_str}",
+            f"├─ Latest Fetched Likes: {likes_str}",
+            f"├─ Added Likes Today: {delta_str}",
+            f"├─ Current Total Likes: {likes_str}",
+            f"└─ {tag}",
+            "",
+        ])
+
     return "\n".join(lines).strip()
 
 
@@ -183,7 +193,7 @@ async def send_report_telegram(report: dict, settings: dict, force: bool = False
         if not await client.is_user_authorized():
             raise RuntimeError(f"Session {session_path.name} is no longer authorized")
         for gid in target_group_ids:
-            sent = await client.send_message(int(gid), text, parse_mode="md")
+            sent = await client.send_message(int(gid), text)
             print(f"📬 [Like Report] Dispatched report to group {gid} (Message ID: {sent.id})")
             sent_ids.append(sent.id)
 

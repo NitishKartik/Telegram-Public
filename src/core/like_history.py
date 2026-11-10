@@ -88,6 +88,8 @@ def daily_uid_summary(data: dict, day: str) -> dict:
             sample = dict(entry["daily"][day])
             if "player_name" not in sample and entry.get("player_name"):
                 sample["player_name"] = entry["player_name"]
+            if "telegram_username" not in sample and entry.get("telegram_username"):
+                sample["telegram_username"] = entry["telegram_username"]
             sample["change_from_previous_observation"] = entry.get("change_from_previous_observation")
             summary[uid] = sample
     return summary
@@ -106,6 +108,7 @@ def record_likes(
     likes: int,
     observed_at: datetime | None = None,
     player_name: str | None = None,
+    telegram_username: str | None = None,
 ) -> dict:
     if not re.fullmatch(r"\d+", uid):
         raise ValueError("UID must contain digits only")
@@ -118,11 +121,19 @@ def record_likes(
     daily = entry.setdefault("daily", {})
     if player_name:
         entry["player_name"] = player_name
+    if telegram_username:
+        entry["telegram_username"] = telegram_username
 
     existing = daily.get(day)
     if existing and datetime.fromisoformat(existing["observed_at"]) >= now and existing.get("likes") == likes:
+        changed = False
         if player_name and not existing.get("player_name"):
             existing["player_name"] = player_name
+            changed = True
+        if telegram_username and not existing.get("telegram_username"):
+            existing["telegram_username"] = telegram_username
+            changed = True
+        if changed:
             save_history(data)
         return entry
 
@@ -135,6 +146,8 @@ def record_likes(
     }
     if entry.get("player_name"):
         sample["player_name"] = entry["player_name"]
+    if entry.get("telegram_username"):
+        sample["telegram_username"] = entry["telegram_username"]
     if added_since_prev is not None:
         sample["added_since_previous_observation"] = added_since_prev
 
