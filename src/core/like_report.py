@@ -90,7 +90,7 @@ def generate_report(settings: dict, day: str | None = None) -> dict:
     """Write JSON/Markdown without opening Telegram sessions or changing history."""
     if not like_history.HISTORY_PATH.is_file():
         raise FileNotFoundError(f"Likes history not found: {like_history.HISTORY_PATH}")
-    selected_day = day or datetime.now(like_history.IST).date().isoformat()
+    selected_day = day or like_history.get_operational_date()
     report = build_report(like_history.load_history(), selected_day)
     output_dir = Path(settings.get("output_dir", "data/reports"))
     if not output_dir.is_absolute():

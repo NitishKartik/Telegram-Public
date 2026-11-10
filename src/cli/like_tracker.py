@@ -12,7 +12,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.core.like_history import (
-    HISTORY_PATH, IST, daily_uid_summary, extract_likes, load_history, record_likes,
+    HISTORY_PATH, IST, daily_uid_summary, extract_likes, get_operational_date, load_history, record_likes,
 )
 from src.engines.level_query import send_level
 from src.utils.terminal_ui import log_like_daily_summary, log_like_result
@@ -31,12 +31,13 @@ def main() -> None:
     show = sub.add_parser("show", help="Show stored history for a UID")
     show.add_argument("uid")
     summary = sub.add_parser("summary", help="Show daily likes and increases by UID")
-    summary.add_argument("--date", default=datetime.now(IST).date().isoformat())
+    summary.add_argument("--date", default=None, help="Operational date YYYY-MM-DD (defaults to current 4am cycle)")
     args = parser.parse_args()
 
     if args.action == "summary":
-        daily = daily_uid_summary(load_history(), args.date)
-        log_like_daily_summary(args.date, daily)
+        target_date = args.date or get_operational_date()
+        daily = daily_uid_summary(load_history(), target_date)
+        log_like_daily_summary(target_date, daily)
         return
     if not re.fullmatch(r"\d+", args.uid):
         parser.error("UID must contain digits only")

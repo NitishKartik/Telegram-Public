@@ -13,7 +13,7 @@ import zipfile
 from datetime import date, datetime
 from pathlib import Path
 
-from src.core.like_history import HISTORY_PATH, IST, rebuild_daily_changes
+from src.core.like_history import HISTORY_PATH, IST, get_operational_date, rebuild_daily_changes
 
 
 ARTIFACT_NAME = "like-history"
@@ -44,8 +44,8 @@ def validate_history(data: dict) -> dict:
             likes = sample.get("likes")
             if isinstance(likes, bool) or not isinstance(likes, int) or likes < 0:
                 raise ValueError(f"UID {uid} has an invalid likes value")
-            if _timestamp(sample["observed_at"]).astimezone(IST).date().isoformat() != day:
-                raise ValueError(f"UID {uid} observation does not match its IST date")
+            if get_operational_date(_timestamp(sample["observed_at"])) != day:
+                raise ValueError(f"UID {uid} observation does not match its IST operational date")
     return data
 
 

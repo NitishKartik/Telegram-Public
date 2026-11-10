@@ -78,6 +78,55 @@ class LikeHistoryTests(unittest.IsolatedAsyncioTestCase):
         finally:
             history_path.unlink(missing_ok=True)
 
+    def test_operational_date_cutoff(self):
+        # 03:15 AM belongs to previous operational day
+        dt_315 = datetime.fromisoformat("2026-11-10T03:15:00+05:30")
+        self.assertEqual(like_history.get_operational_date(dt_315), "2026-11-09")
+
+        # 03:59:59 AM still belongs to previous operational day
+        dt_359 = datetime.fromisoformat("2026-11-10T03:59:59+05:30")
+        self.assertEqual(like_history.get_operational_date(dt_359), "2026-11-09")
+
+        # Exactly 04:00 AM starts the new operational day
+        dt_400 = datetime.fromisoformat("2026-11-10T04:00:00+05:30")
+        self.assertEqual(like_history.get_operational_date(dt_400), "2026-11-10")
+
+        # 05:15 AM belongs to current operational day
+        dt_515 = datetime.fromisoformat("2026-11-10T05:15:00+05:30")
+        self.assertEqual(like_history.get_operational_date(dt_515), "2026-11-10")
+
+    def test_record_likes_before_and_after_4am_cutoff(self):
+        history_path = Path(__file__).with_name("_like_history_cutoff_test.json")
+        try:
+            with patch.object(like_history, "HISTORY_PATH", history_path):
+                # 03:15 AM check closing out previous operational day Nov 09
+                like_history.record_likes(
+                    "999", 500,
+                    datetime.fromisoformat("2026-11-10T03:15:00+05:30"),
+                    player_name="TestHero",
+                    telegram_username="@testhero"
+                )
+                data = like_history.load_history()
+                self.assertIn("2026-11-09", data["uids"]["999"]["daily"])
+                self.assertNotIn("2026-11-10", data["uids"]["999"]["daily"])
+                self.assertEqual(data["uids"]["999"]["daily"]["2026-11-09"]["likes"], 500)
+
+                # 05:15 AM check opening new operational day Nov 10
+                like_history.record_likes(
+                    "999", 555,
+                    datetime.fromisoformat("2026-11-10T05:15:00+05:30"),
+                    player_name="TestHero",
+                    telegram_username="@testhero"
+                )
+                data = like_history.load_history()
+                self.assertIn("2026-11-10", data["uids"]["999"]["daily"])
+                sample_nov10 = data["uids"]["999"]["daily"]["2026-11-10"]
+                self.assertEqual(sample_nov10["likes"], 555)
+                self.assertEqual(sample_nov10["previous_recorded_day"], "2026-11-09")
+                self.assertEqual(sample_nov10["increase_from_previous_recorded_day"], 55)
+        finally:
+            history_path.unlink(missing_ok=True)
+
 
 if __name__ == "__main__":
     unittest.main()

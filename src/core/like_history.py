@@ -10,6 +10,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HISTORY_PATH = ROOT / "data" / "like_history.json"
 IST = timezone(timedelta(hours=5, minutes=30))
+OPERATIONAL_DAY_START_HOUR = 4  # Operational day resets at 04:00 AM IST
+
+
+def get_operational_date(dt: datetime | None = None) -> str:
+    """Return the operational date (YYYY-MM-DD) in IST where each day starts at 04:00 AM.
+
+    Timestamps before 04:00 AM IST belong to the previous operational day.
+    """
+    now = (dt or datetime.now(IST)).astimezone(IST)
+    return (now - timedelta(hours=OPERATIONAL_DAY_START_HOUR)).date().isoformat()
+
 UID_PATTERN = re.compile(r"(?im)\bUID\s*:\s*(\d+)\b")
 LIKES_PATTERN = re.compile(
     r"(?im)^\s*(?:[^\w\n]*\s*)?(?:total\s+|current\s+)?likes?\s*(?:count)?\s*[:=\-]\s*([\d][\d,]*)\b"
@@ -115,7 +126,7 @@ def record_likes(
     if likes < 0:
         raise ValueError("Likes cannot be negative")
     now = (observed_at or datetime.now(IST)).astimezone(IST)
-    day = now.date().isoformat()
+    day = get_operational_date(now)
     data = load_history()
     entry = data.setdefault("uids", {}).setdefault(uid, {"daily": {}})
     daily = entry.setdefault("daily", {})

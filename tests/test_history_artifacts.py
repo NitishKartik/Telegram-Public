@@ -16,7 +16,21 @@ class HistoryArtifactsTests(unittest.TestCase):
             "uids": {
                 "123": {
                     "daily": {
-                        "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T03:35:00+05:30"}
+                        "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T05:35:00+05:30"}
+                    }
+                }
+            }
+        }
+        self.assertEqual(history_artifacts.validate_history(valid), valid)
+
+    def test_validate_history_operational_day_before_4am(self):
+        # 03:15 AM on Nov 10 belongs to operational day Nov 09
+        valid = {
+            "timezone": "Asia/Kolkata",
+            "uids": {
+                "123": {
+                    "daily": {
+                        "2026-11-09": {"likes": 105, "observed_at": "2026-11-10T03:15:00+05:30"}
                     }
                 }
             }
@@ -38,8 +52,8 @@ class HistoryArtifactsTests(unittest.TestCase):
             "uids": {
                 "123": {
                     "daily": {
-                        "2026-11-08": {"likes": 100, "observed_at": "2026-11-08T03:35:00+05:30"},
-                        "2026-11-09": {"likes": 110, "observed_at": "2026-11-09T03:35:00+05:30"}
+                        "2026-11-08": {"likes": 100, "observed_at": "2026-11-08T05:35:00+05:30"},
+                        "2026-11-09": {"likes": 110, "observed_at": "2026-11-09T05:35:00+05:30"}
                     }
                 }
             }
@@ -49,7 +63,7 @@ class HistoryArtifactsTests(unittest.TestCase):
             "uids": {
                 "456": {
                     "daily": {
-                        "2026-11-09": {"likes": 50, "observed_at": "2026-11-09T03:35:00+05:30"}
+                        "2026-11-09": {"likes": 50, "observed_at": "2026-11-09T05:35:00+05:30"}
                     }
                 }
             }
@@ -66,7 +80,7 @@ class HistoryArtifactsTests(unittest.TestCase):
             "uids": {
                 "123": {
                     "daily": {
-                        "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T03:35:00+05:30"}
+                        "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T05:35:00+05:30"}
                     }
                 }
             }
@@ -87,7 +101,7 @@ class HistoryArtifactsTests(unittest.TestCase):
                 "uids": {
                     "123": {
                         "daily": {
-                            "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T03:35:00+05:30"}
+                            "2026-11-09": {"likes": 100, "observed_at": "2026-11-09T05:35:00+05:30"}
                         }
                     }
                 }

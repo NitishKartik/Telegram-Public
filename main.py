@@ -33,7 +33,7 @@ from src.config import (
     load_json_config
 )
 from src.core.stats import BotStats
-from src.core.like_history import IST, daily_uid_summary, load_history
+from src.core.like_history import IST, daily_uid_summary, get_operational_date, load_history
 from src.engines.runner import send_from_account
 from src.utils.terminal_ui import log_header, log_job_info, log_like_daily_summary
 
@@ -51,7 +51,7 @@ async def main():
 
     # Handle direct utility flags first
     if args.summary is not None:
-        selected_day = datetime.now(IST).date().isoformat() if args.summary == "today" else args.summary
+        selected_day = get_operational_date() if args.summary == "today" else args.summary
         daily = daily_uid_summary(load_history(), selected_day)
         log_like_daily_summary(selected_day, daily)
         return
@@ -252,7 +252,7 @@ async def main():
                 )
             expected *= len(target_groups) * repeat_count
             tracked = sum(result or 0 for result in tracked_results)
-            today = datetime.now(IST).date().isoformat()
+            today = get_operational_date()
             daily = daily_uid_summary(load_history(), today)
             log_like_daily_summary(today, daily, captured=tracked, expected=expected)
 
