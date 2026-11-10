@@ -591,8 +591,8 @@
       "repeat_count": 1,
       "humanization_settings": {
         "show_typing_status": true,
-        "wait_between_messages_sec_min": 10,
-        "wait_between_messages_sec_max": 20,
+        "wait_between_messages_sec_min": 5,
+        "wait_between_messages_sec_max": 5,
         "wait_between_rounds_sec_min": 15,
         "wait_between_rounds_sec_max": 20,
         "take_long_break_after_x_messages": 10,
