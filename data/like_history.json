@@ -10,31 +10,30 @@
           "added_since_previous_observation": 115,
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
-          "telegram_username": "@nitish1201",
-          "telegram_name": "Nitish Kartik"
+          "telegram_name": "Nitish Kartik",
+          "telegram_username": "@nitish1201"
         },
         "2026-11-10": {
-          "likes": 126315,
-          "observed_at": "2026-11-10T19:16:01+05:30",
+          "likes": 126327,
+          "observed_at": "2026-11-11T03:15:58+05:30",
           "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
-          "added_since_previous_observation": 130,
-          "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 134,
           "telegram_username": "@nitish1201",
-          "telegram_name": "Nitish Kartik"
+          "telegram_name": "Nitish Kartik",
+          "added_since_previous_observation": 12,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 146
         }
       },
       "latest": {
-        "likes": 126315,
-        "observed_at": "2026-11-10T19:16:01+05:30",
-        "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
-        "telegram_username": "@nitish1201"
+        "likes": 126327,
+        "observed_at": "2026-11-11T03:15:58+05:30",
+        "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶"
       },
-      "change_from_previous_observation": 130,
+      "change_from_previous_observation": 12,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 134,
+      "change_from_previous_recorded_day": 146,
       "player_name": "Ƙᴀɪᴅɪ⁷⁸⁶",
-      "previous_likes": 126185,
+      "previous_likes": 126315,
       "telegram_username": "@nitish1201",
       "telegram_name": "Nitish Kartik"
     },
@@ -46,33 +45,32 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
-          "telegram_username": "@amank1201",
-          "telegram_name": "Aman"
+          "telegram_name": "Tab",
+          "telegram_username": "@amanK1201"
         },
         "2026-11-10": {
-          "likes": 34668,
-          "observed_at": "2026-11-10T19:15:38+05:30",
+          "likes": 34680,
+          "observed_at": "2026-11-11T03:15:38+05:30",
           "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
-          "added_since_previous_observation": 45,
+          "telegram_username": "@amanK1201",
+          "telegram_name": "Tab",
+          "added_since_previous_observation": 12,
           "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 49,
-          "telegram_username": "@amank1201",
-          "telegram_name": "Aman"
+          "increase_from_previous_recorded_day": 61
         }
       },
       "latest": {
-        "likes": 34668,
-        "observed_at": "2026-11-10T19:15:38+05:30",
-        "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
-        "telegram_username": "@amank1201"
+        "likes": 34680,
+        "observed_at": "2026-11-11T03:15:38+05:30",
+        "player_name": "ＦＣ✿Sʜᴀᴅoω࿐"
       },
-      "change_from_previous_observation": 45,
+      "change_from_previous_observation": 12,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 49,
+      "change_from_previous_recorded_day": 61,
       "player_name": "ＦＣ✿Sʜᴀᴅoω࿐",
-      "previous_likes": 34623,
-      "telegram_username": "@amank1201",
-      "telegram_name": "Aman"
+      "previous_likes": 34668,
+      "telegram_username": "@amanK1201",
+      "telegram_name": "Tab"
     },
     "3037405463": {
       "daily": {
@@ -82,32 +80,31 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "MᴏᴍᴏsCʜᴏʀ",
-          "telegram_username": "@eliteshastri",
-          "telegram_name": "Shastri Ayush"
+          "telegram_name": "Shastri Ayush",
+          "telegram_username": "@eliteShastri"
         },
         "2026-11-10": {
-          "likes": 13474,
-          "observed_at": "2026-11-10T19:15:43+05:30",
+          "likes": 13486,
+          "observed_at": "2026-11-11T03:15:42+05:30",
           "player_name": "MᴏᴍᴏsCʜᴏʀ",
-          "added_since_previous_observation": 52,
+          "telegram_username": "@eliteShastri",
+          "telegram_name": "Shastri Ayush",
+          "added_since_previous_observation": 12,
           "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 52,
-          "telegram_username": "@eliteshastri",
-          "telegram_name": "Shastri Ayush"
+          "increase_from_previous_recorded_day": 64
         }
       },
       "latest": {
-        "likes": 13474,
-        "observed_at": "2026-11-10T19:15:43+05:30",
-        "player_name": "MᴏᴍᴏsCʜᴏʀ",
-        "telegram_username": "@eliteshastri"
+        "likes": 13486,
+        "observed_at": "2026-11-11T03:15:42+05:30",
+        "player_name": "MᴏᴍᴏsCʜᴏʀ"
       },
-      "change_from_previous_observation": 52,
+      "change_from_previous_observation": 12,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 52,
+      "change_from_previous_recorded_day": 64,
       "player_name": "MᴏᴍᴏsCʜᴏʀ",
-      "previous_likes": 13422,
-      "telegram_username": "@eliteshastri",
+      "previous_likes": 13474,
+      "telegram_username": "@eliteShastri",
       "telegram_name": "Shastri Ayush"
     },
     "1714257555": {
@@ -118,31 +115,30 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ALWAYSﾠR6",
-          "telegram_username": "@nitish_kartik_1201",
-          "telegram_name": "N P"
+          "telegram_name": "N P",
+          "telegram_username": "@nitish_kartik_1201"
         },
         "2026-11-10": {
-          "likes": 32472,
-          "observed_at": "2026-11-10T19:15:46+05:30",
+          "likes": 32480,
+          "observed_at": "2026-11-11T03:15:43+05:30",
           "player_name": "ALWAYSﾠR6",
-          "added_since_previous_observation": 54,
-          "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 54,
           "telegram_username": "@nitish_kartik_1201",
-          "telegram_name": "N P"
+          "telegram_name": "N P",
+          "added_since_previous_observation": 8,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 62
         }
       },
       "latest": {
-        "likes": 32472,
-        "observed_at": "2026-11-10T19:15:46+05:30",
-        "player_name": "ALWAYSﾠR6",
-        "telegram_username": "@nitish_kartik_1201"
+        "likes": 32480,
+        "observed_at": "2026-11-11T03:15:43+05:30",
+        "player_name": "ALWAYSﾠR6"
       },
-      "change_from_previous_observation": 54,
+      "change_from_previous_observation": 8,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 54,
+      "change_from_previous_recorded_day": 62,
       "player_name": "ALWAYSﾠR6",
-      "previous_likes": 32418,
+      "previous_likes": 32472,
       "telegram_username": "@nitish_kartik_1201",
       "telegram_name": "N P"
     },
@@ -154,32 +150,31 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
-          "telegram_username": "@musapur990",
-          "telegram_name": "Santosh Musapur"
+          "telegram_name": "Santosh Musapur",
+          "telegram_username": "@Musapur990"
         },
         "2026-11-10": {
           "likes": 14306,
-          "observed_at": "2026-11-10T19:15:51+05:30",
+          "observed_at": "2026-11-11T03:15:48+05:30",
           "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
-          "added_since_previous_observation": 43,
+          "telegram_username": "@Musapur990",
+          "telegram_name": "Santosh Musapur",
+          "added_since_previous_observation": 0,
           "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 43,
-          "telegram_username": "@musapur990",
-          "telegram_name": "Santosh Musapur"
+          "increase_from_previous_recorded_day": 43
         }
       },
       "latest": {
         "likes": 14306,
-        "observed_at": "2026-11-10T19:15:51+05:30",
-        "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
-        "telegram_username": "@musapur990"
+        "observed_at": "2026-11-11T03:15:48+05:30",
+        "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™"
       },
-      "change_from_previous_observation": 43,
+      "change_from_previous_observation": 0,
       "previous_recorded_day": "2026-11-09",
       "change_from_previous_recorded_day": 43,
       "player_name": "ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™",
-      "previous_likes": 14263,
-      "telegram_username": "@musapur990",
+      "previous_likes": 14306,
+      "telegram_username": "@Musapur990",
       "telegram_name": "Santosh Musapur"
     },
     "8495643303": {
@@ -190,31 +185,30 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "༱ㅤℓαꪜㅤ",
-          "telegram_username": "@jai84110",
-          "telegram_name": "Jay Kumar"
+          "telegram_name": "Jay Kumar",
+          "telegram_username": "@jai84110"
         },
         "2026-11-10": {
-          "likes": 33394,
-          "observed_at": "2026-11-10T19:15:54+05:30",
+          "likes": 33404,
+          "observed_at": "2026-11-11T03:15:51+05:30",
           "player_name": "༱ㅤℓαꪜㅤ",
-          "added_since_previous_observation": 45,
-          "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 48,
           "telegram_username": "@jai84110",
-          "telegram_name": "Jay Kumar"
+          "telegram_name": "Jay Kumar",
+          "added_since_previous_observation": 10,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 58
         }
       },
       "latest": {
-        "likes": 33394,
-        "observed_at": "2026-11-10T19:15:54+05:30",
-        "player_name": "༱ㅤℓαꪜㅤ",
-        "telegram_username": "@jai84110"
+        "likes": 33404,
+        "observed_at": "2026-11-11T03:15:51+05:30",
+        "player_name": "༱ㅤℓαꪜㅤ"
       },
-      "change_from_previous_observation": 45,
+      "change_from_previous_observation": 10,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 48,
+      "change_from_previous_recorded_day": 58,
       "player_name": "༱ㅤℓαꪜㅤ",
-      "previous_likes": 33349,
+      "previous_likes": 33394,
       "telegram_username": "@jai84110",
       "telegram_name": "Jay Kumar"
     },
@@ -226,31 +220,30 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "MissCrime271",
-          "telegram_username": "@garena_ka_tau",
-          "telegram_name": "Pankaj Kumar"
+          "telegram_name": "Pankaj Kumar",
+          "telegram_username": "@garena_ka_tau"
         },
         "2026-11-10": {
-          "likes": 23913,
-          "observed_at": "2026-11-10T19:15:59+05:30",
+          "likes": 23926,
+          "observed_at": "2026-11-11T03:15:54+05:30",
           "player_name": "MissCrime271",
-          "added_since_previous_observation": 64,
-          "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 64,
           "telegram_username": "@garena_ka_tau",
-          "telegram_name": "Pankaj Kumar"
+          "telegram_name": "Pankaj Kumar",
+          "added_since_previous_observation": 13,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 77
         }
       },
       "latest": {
-        "likes": 23913,
-        "observed_at": "2026-11-10T19:15:59+05:30",
-        "player_name": "MissCrime271",
-        "telegram_username": "@garena_ka_tau"
+        "likes": 23926,
+        "observed_at": "2026-11-11T03:15:54+05:30",
+        "player_name": "MissCrime271"
       },
-      "change_from_previous_observation": 64,
+      "change_from_previous_observation": 13,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 64,
+      "change_from_previous_recorded_day": 77,
       "player_name": "MissCrime271",
-      "previous_likes": 23849,
+      "previous_likes": 23913,
       "telegram_username": "@garena_ka_tau",
       "telegram_name": "Pankaj Kumar"
     },
@@ -262,31 +255,30 @@
           "previous_recorded_day": null,
           "increase_from_previous_recorded_day": null,
           "player_name": "?★Sᗩᑭᑎᗩ★?",
-          "telegram_username": "@rn1201_843110",
-          "telegram_name": "R N"
+          "telegram_name": "R N",
+          "telegram_username": "@rn1201_843110"
         },
         "2026-11-10": {
-          "likes": 14795,
-          "observed_at": "2026-11-10T19:16:10+05:30",
+          "likes": 14813,
+          "observed_at": "2026-11-11T03:16:03+05:30",
           "player_name": "?★Sᗩᑭᑎᗩ★?",
-          "added_since_previous_observation": 55,
-          "previous_recorded_day": "2026-11-09",
-          "increase_from_previous_recorded_day": 57,
           "telegram_username": "@rn1201_843110",
-          "telegram_name": "R N"
+          "telegram_name": "R N",
+          "added_since_previous_observation": 18,
+          "previous_recorded_day": "2026-11-09",
+          "increase_from_previous_recorded_day": 75
         }
       },
       "latest": {
-        "likes": 14795,
-        "observed_at": "2026-11-10T19:16:10+05:30",
-        "player_name": "?★Sᗩᑭᑎᗩ★?",
-        "telegram_username": "@rn1201_843110"
+        "likes": 14813,
+        "observed_at": "2026-11-11T03:16:03+05:30",
+        "player_name": "?★Sᗩᑭᑎᗩ★?"
       },
-      "change_from_previous_observation": 55,
+      "change_from_previous_observation": 18,
       "previous_recorded_day": "2026-11-09",
-      "change_from_previous_recorded_day": 57,
+      "change_from_previous_recorded_day": 75,
       "player_name": "?★Sᗩᑭᑎᗩ★?",
-      "previous_likes": 14740,
+      "previous_likes": 14795,
       "telegram_username": "@rn1201_843110",
       "telegram_name": "R N"
     }
