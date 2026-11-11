@@ -10,11 +10,16 @@ from pathlib import Path
 from src.core import like_history
 
 
-def build_report(history: dict, day: str) -> dict:
+def build_report(history: dict, day: str, target_uids: list[str] | None = None) -> dict:
     """Compare each UID's observation with its latest earlier recorded date."""
     report_date = date.fromisoformat(day)
     rows = {}
-    for uid, entry in sorted(history.get("uids", {}).items()):
+    uids_to_process = sorted(history.get("uids", {}).items())
+    if target_uids:
+        target_set = set(target_uids)
+        uids_to_process = [(uid, entry) for uid, entry in uids_to_process if uid in target_set]
+
+    for uid, entry in uids_to_process:
         daily = entry.get("daily", {})
         current = daily.get(day)
         prior_dates = [candidate for candidate in daily if candidate < day]
@@ -94,13 +99,15 @@ def generate_report(settings: dict, day: str | None = None) -> dict:
     if not like_history.HISTORY_PATH.is_file():
         raise FileNotFoundError(f"Likes history not found: {like_history.HISTORY_PATH}")
     selected_day = day or like_history.get_operational_date()
-    report = build_report(like_history.load_history(), selected_day)
+    target_uids = settings.get("uids")
+    report = build_report(like_history.load_history(), selected_day, target_uids=target_uids)
     output_dir = Path(settings.get("output_dir", "data/reports"))
     if not output_dir.is_absolute():
         output_dir = like_history.ROOT / output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
-    json_path = output_dir / f"like_report_{report['date']}.json"
-    markdown_path = output_dir / f"like_report_{report['date']}.md"
+    report_name = settings.get("report_name", "like_report")
+    json_path = output_dir / f"{report_name}_{report['date']}.json"
+    markdown_path = output_dir / f"{report_name}_{report['date']}.md"
     markdown = render_markdown(report)
     json_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown_path.write_text(markdown, encoding="utf-8")

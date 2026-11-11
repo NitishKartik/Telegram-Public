@@ -216,6 +216,15 @@ async def main():
                 if legacy_path.exists():
                     session_path = legacy_path
 
+            if not session_path.exists() and "yogesh" in session_name.lower():
+                for alt in ("yogesh.session", "yogeshAnytime.session"):
+                    if (sessions_dir / alt).exists():
+                        session_path = sessions_dir / alt
+                        break
+                    elif (PROJECT_ROOT / "Session" / alt).exists():
+                        session_path = PROJECT_ROOT / "Session" / alt
+                        break
+
             if idx > 0:
                 current_stagger += random.uniform(
                     hz_config["account_startup_delay_sec_min"],
@@ -225,6 +234,7 @@ async def main():
             raw_msg = acc.get("messages", acc.get("message", ""))
             msg_list = raw_msg if isinstance(raw_msg, list) else [raw_msg]
 
+            is_info_job = ("info" in time_slot and "report" not in time_slot) or bool(data.get("track_level_replies"))
             tasks.append(send_from_account(
                 account_name=acc["name"],
                 session_path=session_path,
@@ -236,12 +246,13 @@ async def main():
                 api_id=API_ID,
                 api_hash=API_HASH,
                 initial_delay=current_stagger,
-                track_level_replies=(time_slot == "info_bot"),
+                track_level_replies=is_info_job,
             ))
 
         tracked_results = await asyncio.gather(*tasks)
         stats_tracker.print_stats()
-        if time_slot == "info_bot":
+        is_info_job = ("info" in time_slot and "report" not in time_slot) or bool(data.get("track_level_replies"))
+        if is_info_job:
             expected = 0
             for acc in active_accounts:
                 raw = acc.get("messages", acc.get("message", ""))

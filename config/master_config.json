@@ -652,6 +652,90 @@
         }
       ]
     },
+    "info_bot_yogesh": {
+      "groups": [
+        {
+          "id": -1003451378152,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ],
+      "repeat_count": 1,
+      "humanization_settings": {
+        "show_typing_status": true,
+        "wait_between_messages_sec_min": 3,
+        "wait_between_messages_sec_max": 9,
+        "wait_between_rounds_sec_min": 15,
+        "wait_between_rounds_sec_max": 20,
+        "take_long_break_after_x_messages": 0,
+        "long_break_duration_sec_min": 90,
+        "long_break_duration_sec_max": 120,
+        "account_startup_delay_sec_min": 2,
+        "account_startup_delay_sec_max": 5
+      },
+      "accounts": [
+        {
+          "name": "Yogesh",
+          "session": "yogesh",
+          "messages": [
+            "/level 13097579217",
+            "/level 14188429051",
+            "/level 14188192422",
+            "/level 13092887388",
+            "/level 13085801074",
+            "/level 13100000895",
+            "/level 13101570833",
+            "/level 13105600701",
+            "/level 13124491107",
+            "/level 10550747776",
+            "/level 10329971058",
+            "/level 9679913084",
+            "/level 14341562377",
+            "/level 14341555696",
+            "/level 14195528094",
+            "/level 13625805723",
+            "/level 14195516670"
+          ],
+          "active": true
+        }
+      ]
+    },
+    "like_report_yogesh": {
+      "type": "report",
+      "description": "Daily likes summary report for Yogesh tracked UIDs",
+      "output_dir": "data/reports",
+      "report_name": "like_report_yogesh",
+      "send_telegram": true,
+      "sender_account": "Nitish1",
+      "uids": [
+        "13097579217",
+        "14188429051",
+        "14188192422",
+        "13092887388",
+        "13085801074",
+        "13100000895",
+        "13101570833",
+        "13105600701",
+        "13124491107",
+        "10550747776",
+        "10329971058",
+        "9679913084",
+        "14341562377",
+        "14341555696",
+        "14195528094",
+        "13625805723",
+        "14195516670"
+      ],
+      "groups": [
+        {
+          "id": -1003451378152,
+          "solve_captcha": false,
+          "captcha_type": "none",
+          "active": true
+        }
+      ]
+    },
     "MultipleLikes": {
       "groups": [
         {

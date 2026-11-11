@@ -37,6 +37,15 @@ class LikeReportTests(unittest.TestCase):
         self.assertEqual(rows["123"]["daily_increase"], 25)
         self.assertEqual(rows["456"]["daily_increase"], -2)
 
+    def test_filtered_report_target_uids(self):
+        history = {"uids": {
+            "123": {"daily": {"2026-11-09": sample(100, "2026-11-09")}},
+            "456": {"daily": {"2026-11-09": sample(50, "2026-11-09")}},
+        }}
+        report = like_report.build_report(history, "2026-11-09", target_uids=["123"])
+        self.assertIn("123", report["uids"])
+        self.assertNotIn("456", report["uids"])
+
     def test_gap_is_not_reported_as_single_day_growth(self):
         report = like_report.build_report({"uids": {"123": {"daily": {
             "2026-11-06": sample(100, "2026-11-06"),
