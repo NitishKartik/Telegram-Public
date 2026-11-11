@@ -75,7 +75,7 @@ async def main():
         if getattr(args, "telegram", False):
             try:
                 cfg = load_json_config(get_config_path(args.config))
-                job_cfg = cfg.get("jobs", {}).get("like_report", {})
+                job_cfg = cfg.get("jobs", {}).get("like_report_info", cfg.get("jobs", {}).get("like_report", {}))
             except Exception:
                 job_cfg = {}
             try:
@@ -127,6 +127,9 @@ async def main():
         sys.exit(1)
 
     for time_slot in time_slots:
+        if time_slot == "like_report" and "like_report" not in full_data.get("jobs", {}) and "like_report_info" in full_data.get("jobs", {}):
+            time_slot = "like_report_info"
+
         if "jobs" not in full_data or time_slot not in full_data["jobs"]:
             print(f"❌ Error: Job '{time_slot}' not found inside {config_file.name}")
             available_jobs = list(full_data.get("jobs", {}).keys())

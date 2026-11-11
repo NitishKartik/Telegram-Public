@@ -957,12 +957,23 @@
         }
       ]
     },
-    "like_report": {
+    "like_report_info": {
       "type": "report",
-      "description": "Daily likes summary report for all tracked UIDs",
+      "description": "Daily likes summary report for main group tracked UIDs",
       "output_dir": "data/reports",
+      "report_name": "like_report_info",
       "send_telegram": true,
       "sender_account": "Nitish1",
+      "uids": [
+        "1852353345",
+        "2512117368",
+        "3037405463",
+        "1714257555",
+        "5799545097",
+        "8495643303",
+        "4354244058",
+        "9692973675"
+      ],
       "groups": [
         {
           "id": -1003451378152,
