@@ -1,5 +1,6 @@
 """Read saved likes history and produce a separate daily report for every UID."""
 
+import asyncio
 import html
 import json
 import os
@@ -111,8 +112,11 @@ def generate_report(settings: dict, day: str | None = None) -> dict:
     return report
 
 
-def render_telegram_message(report: dict) -> str:
-    """Render mobile-friendly card-view Telegram message in Option A format."""
+BORDER = "──────────────────────────────"
+
+
+def render_telegram_card(report: dict, uid: str, row: dict) -> str:
+    """Render a mobile-friendly card-view message for a single UID."""
     day = report.get("date", "")
     time_str = ""
     gen_raw = report.get("generated_at")
@@ -125,67 +129,74 @@ def render_telegram_message(report: dict) -> str:
     if not time_str:
         time_str = datetime.now(like_history.IST).strftime("%I:%M %p")
 
-    BORDER = "──────────────────────────────"
     header_parts = ["LIKE INFORMATION REPORT"]
     if day:
         header_parts.append(day)
     if time_str:
         header_parts.append(time_str)
 
+    name = row.get("player_name") or "—"
+    safe_name = html.escape(name)
+    likes = row.get("likes")
+    likes_str = f"{likes:,}" if likes is not None else "—"
+    prev_likes = row.get("last_fetched_likes") if row.get("last_fetched_likes") is not None else row.get("previous_likes")
+    prev_likes_str = f"{prev_likes:,}" if prev_likes is not None else "—"
+
+    delta = row.get("daily_increase")
+    if delta is None:
+        delta = row.get("increase_since_previous_record")
+    if delta is not None:
+        delta_str = f"+{delta:,}" if delta > 0 else f"{delta:,}"
+    else:
+        delta_str = "0"
+
+    username = (row.get("telegram_username") or "").lstrip("@").strip()
+    tg_name = (row.get("telegram_name") or "").strip()
+
+    if tg_name and username and username != "—":
+        safe_tg_name = html.escape(tg_name)
+        tag_label = f'<a href="https://t.me/{username}">{safe_tg_name}</a>'
+    elif tg_name:
+        tag_label = html.escape(tg_name)
+    elif username and username != "—":
+        safe_user = html.escape(username)
+        tag_label = f'<a href="https://t.me/{username}">@{safe_user}</a>'
+    else:
+        tag_label = "—"
+
     lines = [
         " • ".join(header_parts),
         BORDER,
+        "┌ Like Info",
+        f"├─ UID: {uid}",
+        f"├─ Nickname: {safe_name}",
+        f"├─ Last Fetched Likes: {prev_likes_str}",
+        f"├─ Latest Fetched Likes: {likes_str}",
+        f"├─ Added Likes Today: {delta_str}",
+        f"├─ Current Total Likes: {likes_str}",
+        f"└─ User: {tag_label}",
+        BORDER,
     ]
-    uids = report.get("uids", {})
-    if not uids:
-        lines.append("⚠️ No UIDs tracked in history.")
-    for uid, row in uids.items():
-        name = row.get("player_name") or "—"
-        safe_name = html.escape(name)
-        likes = row.get("likes")
-        likes_str = f"{likes:,}" if likes is not None else "—"
-        prev_likes = row.get("last_fetched_likes") if row.get("last_fetched_likes") is not None else row.get("previous_likes")
-        prev_likes_str = f"{prev_likes:,}" if prev_likes is not None else "—"
-
-        delta = row.get("daily_increase")
-        if delta is None:
-            delta = row.get("increase_since_previous_record")
-        if delta is not None:
-            delta_str = f"+{delta:,}" if delta > 0 else f"{delta:,}"
-        else:
-            delta_str = "0"
-
-        username = (row.get("telegram_username") or "").lstrip("@").strip()
-        tg_name = (row.get("telegram_name") or "").strip()
-
-        if tg_name and username and username != "—":
-            safe_tg_name = html.escape(tg_name)
-            tag_label = f'<a href="https://t.me/{username}">{safe_tg_name}</a>'
-        elif tg_name:
-            tag_label = html.escape(tg_name)
-        elif username and username != "—":
-            safe_user = html.escape(username)
-            tag_label = f'<a href="https://t.me/{username}">@{safe_user}</a>'
-        else:
-            tag_label = "—"
-
-        lines.extend([
-            "┌ Like Info",
-            f"├─ UID: {uid}",
-            f"├─ Nickname: {safe_name}",
-            f"├─ Last Fetched Likes: {prev_likes_str}",
-            f"├─ Latest Fetched Likes: {likes_str}",
-            f"├─ Added Likes Today: {delta_str}",
-            f"├─ Current Total Likes: {likes_str}",
-            f"└─ {tag_label}",
-            BORDER,
-        ])
 
     return "\n".join(lines).strip()
 
 
+def render_telegram_messages(report: dict) -> list[str]:
+    """Render mobile-friendly card-view Telegram messages, one per UID."""
+    uids = report.get("uids", {})
+    if not uids:
+        day = report.get("date", "")
+        return [f"LIKE INFORMATION REPORT • {day}\n⚠️ No UIDs tracked in history."]
+    return [render_telegram_card(report, uid, row) for uid, row in uids.items()]
+
+
+def render_telegram_message(report: dict) -> str:
+    """Combine individual cards into a single string (for testing / backward compatibility)."""
+    return "\n\n".join(render_telegram_messages(report))
+
+
 async def send_report_telegram(report: dict, settings: dict, force: bool = False) -> list[int]:
-    """Send formatted like report card into configured Telegram groups."""
+    """Send formatted like report cards into configured Telegram groups, one message per user."""
     from telethon import TelegramClient
     from src.config import API_ID, API_HASH, get_sessions_dir
 
@@ -218,16 +229,24 @@ async def send_report_telegram(report: dict, settings: dict, force: bool = False
         else:
             raise FileNotFoundError(f"Session file not found: {session_path}")
 
-    text = render_telegram_message(report)
+    messages = render_telegram_messages(report)
     sent_ids = []
 
     async with TelegramClient(str(session_path), API_ID, API_HASH) as client:
         if not await client.is_user_authorized():
             raise RuntimeError(f"Session {session_path.name} is no longer authorized")
         for gid in target_group_ids:
-            sent = await client.send_message(int(gid), text, parse_mode="html")
-            print(f"📬 [Like Report] Dispatched report to group {gid} (Message ID: {sent.id})")
-            sent_ids.append(sent.id)
+            for text in messages:
+                sent = await client.send_message(
+                    int(gid),
+                    text,
+                    parse_mode="html",
+                    link_preview=False,
+                )
+                print(f"📬 [Like Report] Dispatched report card to group {gid} (Message ID: {sent.id})")
+                sent_ids.append(sent.id)
+                if len(messages) > 1:
+                    await asyncio.sleep(1.0)
 
     return sent_ids
 

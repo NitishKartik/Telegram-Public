@@ -104,7 +104,10 @@ class LikeReportTests(unittest.TestCase):
         self.assertIn("├─ Latest Fetched Likes: 126,181", msg)
         self.assertIn("├─ Added Likes Today: +115", msg)
         self.assertIn("├─ Current Total Likes: 126,181", msg)
-        self.assertIn('└─ <a href="https://t.me/nitish1201">Nitish Kartik</a>', msg)
+        self.assertIn('└─ User: <a href="https://t.me/nitish1201">Nitish Kartik</a>', msg)
+        messages = like_report.render_telegram_messages(report)
+        self.assertEqual(len(messages), 1)
+        self.assertIn('└─ User: <a href="https://t.me/nitish1201">Nitish Kartik</a>', messages[0])
 
 
 if __name__ == "__main__":
