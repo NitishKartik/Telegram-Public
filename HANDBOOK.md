@@ -27,6 +27,7 @@
    - [Recipe C: Stealth Ghost Mode Campaign](#recipe-c-stealth-ghost-mode-campaign)
    - [Recipe D: 24/7 Daily Bonus Harvester](#recipe-d-247-daily-bonus-harvester)
 7. [Chapter 7: Diagnostics, FloodWait Recovery, & Troubleshooting](#chapter-7-diagnostics-floodwait-recovery--troubleshooting)
+8. [Chapter 8: Daily Likes Telemetry, 04:00 AM IST Cycle & Report Dispatch](#chapter-8-daily-likes-telemetry-0400-am-ist-cycle--report-dispatch)
 
 ---
 
@@ -60,22 +61,40 @@ Telegram-Public/
 │   ├── README.md                     # Security & usage guidelines
 │   └── telegram_creds.json           # [IGNORED IN GIT] Local device credentials
 ├── data/
+│   ├── like_history.json             # Persistent Free Fire likes history per UID
+│   ├── reports/                      # Daily Markdown & JSON report artifacts
+│   │   ├── like_report_YYYY-MM-DD.json
+│   │   └── like_report_YYYY-MM-DD.md
 │   ├── sessions/                     # [IGNORED IN GIT] Active .session files
 │   └── dead_sessions/                # Quarantined / expired session files
 ├── src/
+│   ├── __init__.py
 │   ├── config.py                     # Path-independent config & credential resolver
+│   ├── cli/
+│   │   ├── __init__.py
+│   │   └── like_tracker.py           # CLI commands for send, show, and summary
 │   ├── core/
+│   │   ├── __init__.py
+│   │   ├── like_history.py           # Bot reply parser, 04:00 AM IST cycle & history storage
+│   │   ├── like_report.py            # Report builder & per-user Telegram dispatcher
 │   │   └── stats.py                  # Fleet telemetry, metrics, and progress bars
 │   ├── engines/
+│   │   ├── __init__.py
 │   │   ├── captcha.py                # Math & button challenge solver
+│   │   ├── level_query.py            # Guarded single /level query engine
 │   │   └── runner.py                 # Core asynchronous fleet execution worker
 │   └── utils/
+│       ├── __init__.py
+│       ├── history_artifacts.py      # GitHub Actions history artifact sync & restore
 │       ├── logger.py                 # Structured file & stream logging
+│       ├── schedule_guard.py         # Session collision guard (cron & GHA active checks)
 │       ├── session_unpack.py         # Session bundle decoding from GitHub Secrets
 │       └── terminal_ui.py            # Visual, mobile-compatible terminal cards
+├── tests/                            # 13 automated test suites
 ├── .env.example                      # Template for environment variables
 ├── .gitignore                        # Security filter preventing credential leaks
 ├── CAPTCHA.md                        # Quick reference for captcha parameters
+├── COMMANDS.md                       # Comprehensive CLI cheat sheet & manual
 ├── HANDBOOK.md                       # This comprehensive manual
 ├── main.py                           # Primary CLI entry point
 └── requirements.txt                  # Python dependencies
@@ -439,3 +458,39 @@ When running cleanly, your terminal renders real-time device-optimized cards:
   • Yogesh       : ✅ 1   | ❌ 0  | 100%
 ====================================================
 ```
+
+---
+
+## Chapter 8: Daily Likes Telemetry, 04:00 AM IST Cycle & Report Dispatch
+
+The platform includes a specialized telemetry layer designed to monitor Free Fire player profile growth over time.
+
+### 8.1 The 04:00 AM IST Operational Cycle
+Free Fire game servers reset daily quotas at **04:00 AM India Standard Time (IST, UTC+05:30)**. Standard calendar midnight (00:00) does not align with the game's actual reset boundary.
+- All date calculations pass through `src.core.like_history.get_operational_date()`.
+- Timestamps between 00:00:00 and 03:59:59 IST are attributed to the previous operational date.
+- At 04:00:00 IST, the day cycle advances, establishing a pristine 24-hour baseline.
+
+### 8.2 History Persistence (`like_history.py`)
+Player likes queried via `/level <UID>` are parsed and saved in `data/like_history.json`.
+- Each UID retains daily snapshot entries with `likes`, `observed_at`, `player_name`, `telegram_username`, and `telegram_name`.
+- Intra-day observations calculate `added_since_previous_observation`.
+- Day-over-day checks calculate `increase_from_previous_recorded_day`.
+
+### 8.3 Concurrency & Pre-Flight Schedule Guard (`schedule_guard.py`)
+To prevent session conflicts and MTProto authorization key revocation caused by concurrent logins:
+- Local commands (`--send`, `--report --telegram`) query `cron-job.org` upcoming execution windows and inspect active GitHub Actions workflows.
+- If a remote runner is executing or a cron job is within its trigger buffer, local execution is cleanly blocked.
+- Administrators can pass `--force` to override this check during manual debugging.
+
+### 8.4 Report Generation & Telegram Dispatch (`like_report.py`)
+Daily reports are compiled into Markdown and JSON artifacts in `data/reports/`:
+- **Markdown Table**: Saved to `data/reports/like_report_YYYY-MM-DD.md`.
+- **JSON Telemetry**: Saved to `data/reports/like_report_YYYY-MM-DD.json`.
+- **Per-User Message Cards**: When dispatched to Telegram, each user's stats are transmitted as an isolated message card with `User: <a href="https://t.me/username">Account Name</a> (@username)`, execution time header (`⚡ Execution Time: X.Xs`), and `link_preview=False` to prevent chat clutter and 4096-character limit truncation.
+
+### 8.5 Automated CI/CD History Artifacts & GitHub Sync
+In GitHub Actions (`fleet-runner.yml`):
+- `history_artifacts.py restore` downloads the latest `like-history` artifact from previous successful runs.
+- Following fleet execution, `data/like_history.json` and generated reports are saved with 90-day retention.
+- The runner automatically commits changed history files back to `main` with commit message `chore(data): update like history [skip ci]`.

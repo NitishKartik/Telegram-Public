@@ -70,13 +70,15 @@ python main.py --summary 2026-11-09   # View summary for a specific date
 
 ## 2. Generate Likes Report (`--report` or `--time like_report`)
 
-Compares each UID's current likes against their previous recorded date. Saves reports in `data/reports/like_report_YYYY-MM-DD.json` and `.md`, and prints a single-line terminal table.
+Compares each UID's current likes against their previous recorded date based on the **04:00 AM IST operational day cycle**. Saves reports in `data/reports/like_report_YYYY-MM-DD.json` and `.md`, and prints a single-line terminal table.
+
+When dispatched to Telegram (`--telegram`), it sends **separate formatted cards per user** with hyperlinked account handles (`<a href="https://t.me/username">Account Name</a> (@username)`), clean borders, execution telemetry, and link previews suppressed (`link_preview=False`).
 
 ### Syntax
 ```bash
 python main.py --report               # Generate report for today (files + terminal table)
-python main.py --report 2026-11-09    # Generate report for specific date
-python main.py --report --telegram    # Generate report AND send Card View into Info Bot group
+python main.py --report 2026-11-11    # Generate report for specific date
+python main.py --report --telegram    # Generate report AND dispatch separate message cards to Telegram
 python main.py --report --telegram --force # Send to Telegram bypassing cron schedule lock
 python main.py --time like_report     # Runs via master_config.json job (files + Telegram group)
 ```
@@ -84,21 +86,36 @@ python main.py --time like_report     # Runs via master_config.json job (files +
 ### Example Terminal Output
 ```
 ============================================================================
-                       DAILY LIKES REPORT • 2026-11-09 (IST)                        
+                       DAILY LIKES REPORT • 2026-11-11 (IST)                        
 ----------------------------------------------------------------------------
   UID         Player Name         Likes     Prev Day    Change   Status
 ----------------------------------------------------------------------------
-  1714257555  ALWAYSﾠR6          32,418            -         -   First day
-  1852353345  Ƙᴀɪᴅɪ⁷⁸⁶          126,181            -         -   First day
-  2512117368  ＦＣ✿Sʜᴀᴅoω࿐       34,619            -         -   First day
-  3037405463  MᴏᴍᴏsCʜᴏʀ          13,422            -         -   First day
-  4354244058  MissCrime271       23,849            -         -   First day
-  5799545097  ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™        14,263            -         -   First day
-  8495643303  ༱ㅤℓαꪜㅤ           33,346            -         -   First day
-  9692973675  ?★Sᗩᑭᑎᗩ★?          14,738            -         -   First day
+  1714257555  ALWAYSﾠR6          32,593   2026-11-10      +113   Daily +113
+  1852353345  Ƙᴀɪᴅɪ⁷⁸⁶          126,454   2026-11-10      +127   Daily +127
+  2512117368  ＦＣ✿Sʜᴀᴅoω࿐       34,795   2026-11-10      +115   Daily +115
+  3037405463  MᴏᴍᴏsCʜᴏʀ          13,609   2026-11-10      +123   Daily +123
+  4354244058  MissCrime271       24,026   2026-11-10      +100   Daily +100
+  5799545097  ꕶꕶ┊Ꮪᴀᴅ-Ᏼᴏʏ™        14,403   2026-11-10       +97   Daily +97
+  8495643303  ༱ㅤℓαꪜㅤ           33,490   2026-11-10       +86   Daily +86
+  9692973675  ?★Sᗩᑭᑎᗩ★?          14,923   2026-11-10      +110   Daily +110
 ----------------------------------------------------------------------------
-  Report files: data/reports/like_report_2026-11-09.json & data/reports/like_report_2026-11-09.md
+  Report files: data/reports/like_report_2026-11-11.json & data/reports/like_report_2026-11-11.md
 ============================================================================
+```
+
+### Example Telegram Message Card (Dispatched per User)
+```text
+LIKE INFORMATION REPORT • 2026-11-11 • 09:25 AM
+──────────────────────────────
+┌ Like Info
+├─ UID: 1852353345
+├─ Nickname: Ƙᴀɪᴅɪ⁷⁸⁶
+├─ Last Fetched Likes: 126,185
+├─ Latest Fetched Likes: 126,454
+├─ Added Likes Today: +127
+├─ Current Total Likes: 126,454
+└─ User: <a href="https://t.me/Kaidi786">Kaidi</a> (@Kaidi786)
+──────────────────────────────
 ```
 
 ---
