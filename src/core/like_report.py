@@ -224,17 +224,36 @@ async def send_report_telegram(report: dict, settings: dict, force: bool = False
     if not target_group_ids:
         target_group_ids = [-1003451378152]
 
-    sender_name = settings.get("sender_account", "nitish1").lower()
-    if not sender_name.endswith(".session"):
-        sender_name += ".session"
+    raw_sender = settings.get("sender_account", "nitish1")
+    sender_name = raw_sender if raw_sender.endswith(".session") else f"{raw_sender}.session"
 
     session_path = get_sessions_dir() / sender_name
     if not session_path.exists():
         legacy_path = like_history.ROOT / "Session" / sender_name
         if legacy_path.exists():
             session_path = legacy_path
-        else:
-            raise FileNotFoundError(f"Session file not found: {session_path}")
+
+    if not session_path.exists():
+        for s_dir in (get_sessions_dir(), like_history.ROOT / "Session"):
+            if s_dir.exists():
+                for candidate in s_dir.glob("*.session"):
+                    if candidate.name.lower() == sender_name.lower():
+                        session_path = candidate
+                        break
+            if session_path.exists():
+                break
+
+    if not session_path.exists() and "yogesh" in sender_name.lower():
+        for alt in ("yogeshAnytime.session", "yogesh.session"):
+            for s_dir in (get_sessions_dir(), like_history.ROOT / "Session"):
+                if (s_dir / alt).exists():
+                    session_path = s_dir / alt
+                    break
+            if session_path.exists():
+                break
+
+    if not session_path.exists():
+        raise FileNotFoundError(f"Session file not found: {session_path}")
 
     messages = render_telegram_messages(report)
     sent_ids = []
