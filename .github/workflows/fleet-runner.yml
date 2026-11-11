@@ -19,6 +19,7 @@ on:
           - info_bot_yogesh
           - like_report
           - like_report_info
+          - like_report_multipleLikes
           - like_report_yogesh
           - MultipleLikes
           - privateGroup
@@ -75,7 +76,7 @@ jobs:
           retention-days: 90
 
       - name: Upload Like Reports
-        if: always() && (github.event.inputs.config_target == 'like_report' || github.event.inputs.config_target == 'like_report_info' || github.event.inputs.config_target == 'like_report_yogesh')
+        if: always() && (github.event.inputs.config_target == 'like_report' || github.event.inputs.config_target == 'like_report_info' || github.event.inputs.config_target == 'like_report_yogesh' || github.event.inputs.config_target == 'like_report_multipleLikes')
         uses: actions/upload-artifact@v4
         with:
           name: like-reports

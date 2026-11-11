@@ -688,6 +688,7 @@
             "/level 13101570833",
             "/level 13105600701",
             "/level 13124491107",
+            "/level 4354244058",
             "/level 10550747776",
             "/level 10329971058",
             "/level 9679913084",
@@ -701,11 +702,11 @@
         }
       ]
     },
-    "like_report_yogesh": {
+    "like_report_multipleLikes": {
       "type": "report",
-      "description": "Daily likes summary report for Yogesh tracked UIDs",
+      "description": "Daily likes summary report for MultipleLikes tracked UIDs",
       "output_dir": "data/reports",
-      "report_name": "like_report_yogesh",
+      "report_name": "like_report_multipleLikes",
       "send_telegram": true,
       "sender_account": "Nitish1",
       "uids": [
@@ -718,6 +719,7 @@
         "13101570833",
         "13105600701",
         "13124491107",
+        "4354244058",
         "10550747776",
         "10329971058",
         "9679913084",

@@ -129,6 +129,8 @@ async def main():
     for time_slot in time_slots:
         if time_slot == "like_report" and "like_report" not in full_data.get("jobs", {}) and "like_report_info" in full_data.get("jobs", {}):
             time_slot = "like_report_info"
+        elif time_slot == "like_report_yogesh" and "like_report_yogesh" not in full_data.get("jobs", {}) and "like_report_multipleLikes" in full_data.get("jobs", {}):
+            time_slot = "like_report_multipleLikes"
 
         if "jobs" not in full_data or time_slot not in full_data["jobs"]:
             print(f"❌ Error: Job '{time_slot}' not found inside {config_file.name}")
