@@ -442,20 +442,30 @@
           "added_since_previous_observation": 0,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 123
+        },
+        "2026-11-14": {
+          "likes": 24409,
+          "observed_at": "2026-11-14T05:02:41+05:30",
+          "player_name": "MissCrime271",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 87,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 87
         }
       },
       "latest": {
-        "likes": 24322,
-        "observed_at": "2026-11-14T03:15:57+05:30",
+        "likes": 24409,
+        "observed_at": "2026-11-14T05:02:41+05:30",
         "player_name": "MissCrime271"
       },
-      "change_from_previous_observation": 0,
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 123,
+      "change_from_previous_observation": 87,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 87,
       "player_name": "MissCrime271",
       "previous_likes": 24322,
-      "telegram_username": "@garena_ka_tau",
-      "telegram_name": "Pankaj Kumar"
+      "telegram_username": "@yogeshKeypad",
+      "telegram_name": "Yogesh Singh"
     },
     "9692973675": {
       "daily": {
@@ -552,20 +562,30 @@
           "added_since_previous_observation": 53,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 53
+        },
+        "2026-11-14": {
+          "likes": 3355,
+          "observed_at": "2026-11-14T05:00:42+05:30",
+          "player_name": "NPˣXˣPN²",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 53,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 53
         }
       },
       "change_from_previous_observation": 53,
       "latest": {
-        "likes": 3302,
-        "observed_at": "2026-11-13T05:00:41+05:30",
+        "likes": 3355,
+        "observed_at": "2026-11-14T05:00:42+05:30",
         "player_name": "NPˣXˣPN²"
       },
       "player_name": "NPˣXˣPN²",
-      "previous_recorded_day": "2026-11-12",
+      "previous_recorded_day": "2026-11-13",
       "change_from_previous_recorded_day": 53,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 3249
+      "previous_likes": 3302
     },
     "14188429051": {
       "daily": {
@@ -597,20 +617,30 @@
           "added_since_previous_observation": 41,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 41
+        },
+        "2026-11-14": {
+          "likes": 2884,
+          "observed_at": "2026-11-14T05:00:54+05:30",
+          "player_name": "NPˣXˣPN™001",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 0,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 0
         }
       },
-      "change_from_previous_observation": 41,
+      "change_from_previous_observation": 0,
       "latest": {
         "likes": 2884,
-        "observed_at": "2026-11-13T05:00:53+05:30",
+        "observed_at": "2026-11-14T05:00:54+05:30",
         "player_name": "NPˣXˣPN™001"
       },
       "player_name": "NPˣXˣPN™001",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 41,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 0,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2843
+      "previous_likes": 2884
     },
     "14188192422": {
       "daily": {
@@ -642,20 +672,30 @@
           "added_since_previous_observation": 36,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 36
+        },
+        "2026-11-14": {
+          "likes": 2293,
+          "observed_at": "2026-11-14T05:01:08+05:30",
+          "player_name": "NPˣXˣPN™000",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 50,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 50
         }
       },
-      "change_from_previous_observation": 36,
+      "change_from_previous_observation": 50,
       "latest": {
-        "likes": 2243,
-        "observed_at": "2026-11-13T05:01:05+05:30",
+        "likes": 2293,
+        "observed_at": "2026-11-14T05:01:08+05:30",
         "player_name": "NPˣXˣPN™000"
       },
       "player_name": "NPˣXˣPN™000",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 36,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 50,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2207
+      "previous_likes": 2243
     },
     "13092887388": {
       "daily": {
@@ -687,20 +727,30 @@
           "added_since_previous_observation": 36,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 36
+        },
+        "2026-11-14": {
+          "likes": 2721,
+          "observed_at": "2026-11-14T05:01:21+05:30",
+          "player_name": "NPˣXˣPN¹",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 49,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 49
         }
       },
-      "change_from_previous_observation": 36,
+      "change_from_previous_observation": 49,
       "latest": {
-        "likes": 2672,
-        "observed_at": "2026-11-13T05:01:20+05:30",
+        "likes": 2721,
+        "observed_at": "2026-11-14T05:01:21+05:30",
         "player_name": "NPˣXˣPN¹"
       },
       "player_name": "NPˣXˣPN¹",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 36,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 49,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2636
+      "previous_likes": 2672
     },
     "13085801074": {
       "daily": {
@@ -732,20 +782,30 @@
           "added_since_previous_observation": 26,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 26
+        },
+        "2026-11-14": {
+          "likes": 2661,
+          "observed_at": "2026-11-14T05:01:32+05:30",
+          "player_name": "NPˣXˣPN",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 49,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 49
         }
       },
-      "change_from_previous_observation": 26,
+      "change_from_previous_observation": 49,
       "latest": {
-        "likes": 2612,
-        "observed_at": "2026-11-13T05:01:34+05:30",
+        "likes": 2661,
+        "observed_at": "2026-11-14T05:01:32+05:30",
         "player_name": "NPˣXˣPN"
       },
       "player_name": "NPˣXˣPN",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 26,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 49,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2586
+      "previous_likes": 2612
     },
     "13100000895": {
       "daily": {
@@ -777,20 +837,30 @@
           "added_since_previous_observation": 36,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 36
+        },
+        "2026-11-14": {
+          "likes": 2848,
+          "observed_at": "2026-11-14T05:01:46+05:30",
+          "player_name": "NPˣXˣPN³",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 47,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 47
         }
       },
-      "change_from_previous_observation": 36,
+      "change_from_previous_observation": 47,
       "latest": {
-        "likes": 2801,
-        "observed_at": "2026-11-13T05:01:44+05:30",
+        "likes": 2848,
+        "observed_at": "2026-11-14T05:01:46+05:30",
         "player_name": "NPˣXˣPN³"
       },
       "player_name": "NPˣXˣPN³",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 36,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 47,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2765
+      "previous_likes": 2801
     },
     "13101570833": {
       "daily": {
@@ -822,20 +892,30 @@
           "added_since_previous_observation": 35,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 35
+        },
+        "2026-11-14": {
+          "likes": 2586,
+          "observed_at": "2026-11-14T05:02:01+05:30",
+          "player_name": "NPˣXˣPN⁴",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 47,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 47
         }
       },
-      "change_from_previous_observation": 35,
+      "change_from_previous_observation": 47,
       "latest": {
-        "likes": 2539,
-        "observed_at": "2026-11-13T05:01:57+05:30",
+        "likes": 2586,
+        "observed_at": "2026-11-14T05:02:01+05:30",
         "player_name": "NPˣXˣPN⁴"
       },
       "player_name": "NPˣXˣPN⁴",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 35,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 47,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2504
+      "previous_likes": 2539
     },
     "13105600701": {
       "daily": {
@@ -867,20 +947,30 @@
           "added_since_previous_observation": 34,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 34
+        },
+        "2026-11-14": {
+          "likes": 2783,
+          "observed_at": "2026-11-14T05:02:13+05:30",
+          "player_name": "NPˣXˣPN⁵",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 47,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 47
         }
       },
-      "change_from_previous_observation": 34,
+      "change_from_previous_observation": 47,
       "latest": {
-        "likes": 2736,
-        "observed_at": "2026-11-13T05:02:13+05:30",
+        "likes": 2783,
+        "observed_at": "2026-11-14T05:02:13+05:30",
         "player_name": "NPˣXˣPN⁵"
       },
       "player_name": "NPˣXˣPN⁵",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 34,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 47,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2702
+      "previous_likes": 2736
     },
     "13124491107": {
       "daily": {
@@ -912,20 +1002,30 @@
           "added_since_previous_observation": 29,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 29
+        },
+        "2026-11-14": {
+          "likes": 2805,
+          "observed_at": "2026-11-14T05:02:24+05:30",
+          "player_name": "NPˣXˣPN⁷",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 46,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 46
         }
       },
-      "change_from_previous_observation": 29,
+      "change_from_previous_observation": 46,
       "latest": {
-        "likes": 2759,
-        "observed_at": "2026-11-13T05:02:29+05:30",
+        "likes": 2805,
+        "observed_at": "2026-11-14T05:02:24+05:30",
         "player_name": "NPˣXˣPN⁷"
       },
       "player_name": "NPˣXˣPN⁷",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 29,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 46,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2730
+      "previous_likes": 2759
     },
     "10550747776": {
       "daily": {
@@ -957,20 +1057,30 @@
           "added_since_previous_observation": 1,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 1
+        },
+        "2026-11-14": {
+          "likes": 2612,
+          "observed_at": "2026-11-14T05:02:52+05:30",
+          "player_name": "MissCrime127",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 45,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 45
         }
       },
-      "change_from_previous_observation": 1,
+      "change_from_previous_observation": 45,
       "latest": {
-        "likes": 2567,
-        "observed_at": "2026-11-13T05:03:00+05:30",
+        "likes": 2612,
+        "observed_at": "2026-11-14T05:02:52+05:30",
         "player_name": "MissCrime127"
       },
       "player_name": "MissCrime127",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 1,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 45,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2566
+      "previous_likes": 2567
     },
     "10329971058": {
       "daily": {
@@ -1002,20 +1112,30 @@
           "added_since_previous_observation": 33,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 33
+        },
+        "2026-11-14": {
+          "likes": 8065,
+          "observed_at": "2026-11-14T05:03:03+05:30",
+          "player_name": "MissCrime217",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 45,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 45
         }
       },
-      "change_from_previous_observation": 33,
+      "change_from_previous_observation": 45,
       "latest": {
-        "likes": 8020,
-        "observed_at": "2026-11-13T05:03:13+05:30",
+        "likes": 8065,
+        "observed_at": "2026-11-14T05:03:03+05:30",
         "player_name": "MissCrime217"
       },
       "player_name": "MissCrime217",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 33,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 45,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 7987
+      "previous_likes": 8020
     },
     "9679913084": {
       "daily": {
@@ -1047,20 +1167,30 @@
           "added_since_previous_observation": 32,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 32
+        },
+        "2026-11-14": {
+          "likes": 3001,
+          "observed_at": "2026-11-14T05:03:19+05:30",
+          "player_name": "Guy6N8W7N5S",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 45,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 45
         }
       },
-      "change_from_previous_observation": 32,
+      "change_from_previous_observation": 45,
       "latest": {
-        "likes": 2956,
-        "observed_at": "2026-11-13T05:03:25+05:30",
+        "likes": 3001,
+        "observed_at": "2026-11-14T05:03:19+05:30",
         "player_name": "Guy6N8W7N5S"
       },
       "player_name": "Guy6N8W7N5S",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 32,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 45,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2924
+      "previous_likes": 2956
     },
     "14341562377": {
       "daily": {
@@ -1092,20 +1222,30 @@
           "added_since_previous_observation": 31,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 31
+        },
+        "2026-11-14": {
+          "likes": 2776,
+          "observed_at": "2026-11-14T05:03:31+05:30",
+          "player_name": "DEEPAK²⁰²⁶™",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 45,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 45
         }
       },
-      "change_from_previous_observation": 31,
+      "change_from_previous_observation": 45,
       "latest": {
-        "likes": 2731,
-        "observed_at": "2026-11-13T05:03:38+05:30",
+        "likes": 2776,
+        "observed_at": "2026-11-14T05:03:31+05:30",
         "player_name": "DEEPAK²⁰²⁶™"
       },
       "player_name": "DEEPAK²⁰²⁶™",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 31,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 45,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2700
+      "previous_likes": 2731
     },
     "14341555696": {
       "daily": {
@@ -1137,20 +1277,30 @@
           "added_since_previous_observation": 31,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 31
+        },
+        "2026-11-14": {
+          "likes": 2499,
+          "observed_at": "2026-11-14T05:03:43+05:30",
+          "player_name": "REAL²⁰²⁶™",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 36,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 36
         }
       },
-      "change_from_previous_observation": 31,
+      "change_from_previous_observation": 36,
       "latest": {
-        "likes": 2463,
-        "observed_at": "2026-11-13T05:03:54+05:30",
+        "likes": 2499,
+        "observed_at": "2026-11-14T05:03:43+05:30",
         "player_name": "REAL²⁰²⁶™"
       },
       "player_name": "REAL²⁰²⁶™",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 31,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 36,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2432
+      "previous_likes": 2463
     },
     "14195528094": {
       "daily": {
@@ -1182,20 +1332,30 @@
           "added_since_previous_observation": 84,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 84
+        },
+        "2026-11-14": {
+          "likes": 2587,
+          "observed_at": "2026-11-14T05:03:59+05:30",
+          "player_name": "KHUSHI²⁰²⁵™",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 34,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 34
         }
       },
-      "change_from_previous_observation": 84,
+      "change_from_previous_observation": 34,
       "latest": {
-        "likes": 2553,
-        "observed_at": "2026-11-13T05:04:07+05:30",
+        "likes": 2587,
+        "observed_at": "2026-11-14T05:03:59+05:30",
         "player_name": "KHUSHI²⁰²⁵™"
       },
       "player_name": "KHUSHI²⁰²⁵™",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 84,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 34,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2469
+      "previous_likes": 2553
     },
     "13625805723": {
       "daily": {
@@ -1227,20 +1387,30 @@
           "added_since_previous_observation": 70,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 70
+        },
+        "2026-11-14": {
+          "likes": 2868,
+          "observed_at": "2026-11-14T05:04:13+05:30",
+          "player_name": "™™™™™™™™¹²⁰¹",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 34,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 34
         }
       },
-      "change_from_previous_observation": 70,
+      "change_from_previous_observation": 34,
       "latest": {
-        "likes": 2834,
-        "observed_at": "2026-11-13T05:04:22+05:30",
+        "likes": 2868,
+        "observed_at": "2026-11-14T05:04:13+05:30",
         "player_name": "™™™™™™™™¹²⁰¹"
       },
       "player_name": "™™™™™™™™¹²⁰¹",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 70,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 34,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2764
+      "previous_likes": 2834
     },
     "14195516670": {
       "daily": {
@@ -1272,20 +1442,30 @@
           "added_since_previous_observation": 57,
           "previous_recorded_day": "2026-11-12",
           "increase_from_previous_recorded_day": 57
+        },
+        "2026-11-14": {
+          "likes": 2526,
+          "observed_at": "2026-11-14T05:04:28+05:30",
+          "player_name": "NITISH²⁰²⁵™",
+          "telegram_username": "@yogeshKeypad",
+          "telegram_name": "Yogesh Singh",
+          "added_since_previous_observation": 31,
+          "previous_recorded_day": "2026-11-13",
+          "increase_from_previous_recorded_day": 31
         }
       },
-      "change_from_previous_observation": 57,
+      "change_from_previous_observation": 31,
       "latest": {
-        "likes": 2495,
-        "observed_at": "2026-11-13T05:04:34+05:30",
+        "likes": 2526,
+        "observed_at": "2026-11-14T05:04:28+05:30",
         "player_name": "NITISH²⁰²⁵™"
       },
       "player_name": "NITISH²⁰²⁵™",
-      "previous_recorded_day": "2026-11-12",
-      "change_from_previous_recorded_day": 57,
+      "previous_recorded_day": "2026-11-13",
+      "change_from_previous_recorded_day": 31,
       "telegram_username": "@yogeshKeypad",
       "telegram_name": "Yogesh Singh",
-      "previous_likes": 2438
+      "previous_likes": 2495
     }
   }
 }
