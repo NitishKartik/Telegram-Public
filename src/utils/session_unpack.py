@@ -1,40 +1,43 @@
 """
 Automated Telegram Sessions Unpacker for GitHub Actions.
-Safely decodes compressed session bundles passed via GitHub Secrets
-(SESSIONS_PART_1 and SESSIONS_PART_2) and restores them to Session/.
+Restores lightweight StringSession files (Session/<name>.txt) from TELEGRAM_SESSIONS,
+with fallback support for legacy tar.gz SESSIONS_PART_1 / SESSIONS_PART_2.
 """
 
-import os
-import io
 import base64
+import io
+import json
+import os
 import tarfile
 from pathlib import Path
 
 
 def unpack_sessions() -> bool:
+    target_dir = Path("Session")
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    raw_json = os.environ.get("TELEGRAM_SESSIONS", "").strip()
+    if raw_json:
+        sessions = json.loads(raw_json)
+        for name, session_str in sessions.items():
+            clean_name = name[:-8] if name.endswith(".session") else name
+            (target_dir / f"{clean_name}.txt").write_text(session_str.strip(), encoding="utf-8")
+        print(f"[session_unpack] Restored {len(sessions)} StringSession(s) into Session/")
+        return True
+
     part1 = os.environ.get("SESSIONS_PART_1", "").strip()
     part2 = os.environ.get("SESSIONS_PART_2", "").strip()
-
     if not part1 and not part2:
-        print("[session_unpack] Notice: No SESSIONS_PART secrets found in environment.")
+        print("[session_unpack] Notice: No session secrets found in environment.")
         return False
 
-    try:
-        combined = (part1 + part2).strip()
-        compressed_bytes = base64.b64decode(combined)
+    compressed_bytes = base64.b64decode((part1 + part2).strip())
+    with tarfile.open(fileobj=io.BytesIO(compressed_bytes), mode="r:gz") as tar:
+        tar.extractall(path=target_dir)
 
-        target_dir = Path("Session")
-        target_dir.mkdir(parents=True, exist_ok=True)
-
-        with tarfile.open(fileobj=io.BytesIO(compressed_bytes), mode="r:gz") as tar:
-            tar.extractall(path=target_dir)
-
-        restored = list(target_dir.glob("*.session"))
-        print(f"[session_unpack] Successfully unpacked {len(restored)} Telegram session(s) into Session/")
-        return True
-    except Exception as e:
-        print(f"[session_unpack] ERROR: Failed to unpack sessions from secrets: {e}")
-        raise
+    restored = list(target_dir.glob("*.session"))
+    print(f"[session_unpack] Unpacked {len(restored)} legacy .session file(s) into Session/")
+    return True
 
 
 if __name__ == "__main__":

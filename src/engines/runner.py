@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 from telethon import TelegramClient, events
+from telethon.sessions import StringSession
 from telethon.tl.types import Channel, Chat, User
 from telethon.errors import FloodWaitError, UserBannedInChannelError, ChatWriteForbiddenError
 
@@ -78,7 +79,9 @@ async def send_from_account(
     tracked_count = 0
 
     try:
-        client = TelegramClient(str(session_path), api_id, api_hash)
+        txt_session = session_path.parent / f"{session_path.stem}.txt"
+        session_source = StringSession(txt_session.read_text(encoding="utf-8").strip()) if txt_session.exists() else str(session_path)
+        client = TelegramClient(session_source, api_id, api_hash)
 
         async def active_sleep(duration: float, stop_on_solve: bool = False):
             poll_interval = 2.0

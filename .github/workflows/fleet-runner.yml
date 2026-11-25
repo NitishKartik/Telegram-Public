@@ -55,6 +55,7 @@ jobs:
 
       - name: Restore Telegram Sessions
         env:
+          TELEGRAM_SESSIONS: ${{ secrets.TELEGRAM_SESSIONS }}
           SESSIONS_PART_1: ${{ secrets.SESSIONS_PART_1 }}
           SESSIONS_PART_2: ${{ secrets.SESSIONS_PART_2 }}
         run: |
