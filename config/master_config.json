@@ -178,6 +178,12 @@
           "session": "yogesh",
           "message": "/like 10333615213",
           "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/like 2876365011",
+          "active": true
         }
       ]
     },
@@ -263,6 +269,12 @@
           "name": "Yogesh",
           "session": "yogesh",
           "message": "/like 10333615213",
+          "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/like 2876365011",
           "active": true
         }
       ]
@@ -379,6 +391,12 @@
           "session": "yogesh",
           "message": "/like IND 10333615213",
           "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/like IND 2876365011",
+          "active": true
         }
       ]
     },
@@ -463,6 +481,12 @@
           "name": "Yogesh",
           "session": "yogesh",
           "message": "/like 10333615213",
+          "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/like 2876365011",
           "active": true
         }
       ]
@@ -576,6 +600,15 @@
             "DAILY BONUS"
           ],
           "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "messages": [
+            "/bonus",
+            "DAILY BONUS"
+          ],
+          "active": true
         }
       ]
     },
@@ -648,6 +681,12 @@
           "name": "Renu",
           "session": "renu",
           "message": "/level 9692973675",
+          "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/level 2876365011",
           "active": true
         }
       ]
@@ -870,6 +909,12 @@
           "session": "yogesh",
           "message": "/like IND 10333615213",
           "active": true
+        },
+        {
+          "name": "Mayank",
+          "session": "mayank",
+          "message": "/like IND 2876365011",
+          "active": true
         }
       ]
     },
@@ -974,7 +1019,8 @@
         "5799545097",
         "8495643303",
         "4354244058",
-        "9692973675"
+        "9692973675",
+        "2876365011"
       ],
       "groups": [
         {
