@@ -4,10 +4,10 @@ import re
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 from telethon import TelegramClient, events
-from telethon.sessions import StringSession
 from telethon.tl.types import Channel, Chat, User
 from telethon.errors import FloodWaitError, UserBannedInChannelError, ChatWriteForbiddenError
 
+from src.config import load_telethon_session
 from src.engines.captcha import process_captcha
 from src.core.stats import print_progress_bar, BotStats
 from src.core.like_history import extract_player_name, record_likes
@@ -79,8 +79,7 @@ async def send_from_account(
     tracked_count = 0
 
     try:
-        txt_session = session_path.parent / f"{session_path.stem}.txt"
-        session_source = StringSession(txt_session.read_text(encoding="utf-8").strip()) if txt_session.exists() else str(session_path)
+        session_source = load_telethon_session(session_path)
         client = TelegramClient(session_source, api_id, api_hash)
 
         async def active_sleep(duration: float, stop_on_solve: bool = False):

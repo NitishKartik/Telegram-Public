@@ -60,6 +60,61 @@ def get_sessions_dir() -> Path:
         return legacy
     return nested
 
+def _session_search_dirs() -> list[Path]:
+    dirs = []
+    for candidate in (get_sessions_dir(), PROJECT_ROOT / "Session"):
+        if candidate not in dirs:
+            dirs.append(candidate)
+    return dirs
+
+def resolve_session_path(session_name: str, prefer_yogesh_anytime: bool = False) -> Path:
+    """Resolve a .txt StringSession or .session file across session directories."""
+    stem = session_name
+    for suffix in (".session", ".txt"):
+        if stem.lower().endswith(suffix):
+            stem = stem[:-len(suffix)]
+            break
+
+    candidate_stems = [stem]
+    if "yogesh" in stem.lower():
+        aliases = ("yogeshAnytime", "yogesh") if prefer_yogesh_anytime else ("yogesh", "yogeshAnytime")
+        for alias in aliases:
+            if alias not in candidate_stems:
+                candidate_stems.append(alias)
+
+    search_dirs = _session_search_dirs()
+    for ext in (".txt", ".session"):
+        for case_sensitive in (True, False):
+            for s_dir in search_dirs:
+                if not s_dir.is_dir():
+                    continue
+                candidates = [p for p in s_dir.glob(f"*{ext}") if p.is_file()]
+                for cand_stem in candidate_stems:
+                    for candidate in candidates:
+                        matched = (
+                            candidate.stem == cand_stem
+                            if case_sensitive
+                            else candidate.stem.lower() == cand_stem.lower()
+                        )
+                        if matched:
+                            return candidate
+
+    return get_sessions_dir() / f"{stem}.session"
+
+def load_telethon_session(session_path: Path):
+    """Return a StringSession when a .txt session exists, else the .session file path."""
+    from telethon.sessions import StringSession
+
+    txt_session = session_path if session_path.suffix.lower() == ".txt" else session_path.with_suffix(".txt")
+    if txt_session.is_file():
+        session_str = txt_session.read_text(encoding="utf-8").strip()
+        if not session_str:
+            raise ValueError(f"StringSession file is empty: {txt_session}")
+        return StringSession(session_str)
+    if session_path.is_file():
+        return str(session_path)
+    raise FileNotFoundError(f"Session file not found: {session_path}")
+
 def load_json_config(file_path: Optional[Path] = None) -> Dict[str, Any]:
     target = file_path or get_config_path("master_config.json")
     if not target.exists():

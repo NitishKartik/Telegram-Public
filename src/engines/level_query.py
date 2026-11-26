@@ -2,7 +2,7 @@
 
 import asyncio
 
-from src.config import API_HASH, API_ID, get_sessions_dir, load_json_config
+from src.config import API_HASH, API_ID, load_json_config, load_telethon_session, resolve_session_path
 from src.core.like_history import extract_likes, extract_uid
 from src.utils.schedule_guard import check_cron_window, check_public_workflows
 
@@ -50,12 +50,11 @@ async def send_level(uid: str, timeout_seconds: int = 120, force: bool = False) 
     if not force:
         check_cron_window()
         check_public_workflows()
-    session = get_sessions_dir() / "nitish1.session"
-    if not session.is_file():
-        raise FileNotFoundError(session)
+    session = resolve_session_path("nitish1")
+    session_source = load_telethon_session(session)
     group_id = info_bot_group_id()
 
-    async with TelegramClient(str(session), API_ID, API_HASH) as client:
+    async with TelegramClient(session_source, API_ID, API_HASH) as client:
         if not await client.is_user_authorized():
             raise RuntimeError("nitish1 session is no longer authorized")
         sent = await client.send_message(group_id, f"/level {uid}")

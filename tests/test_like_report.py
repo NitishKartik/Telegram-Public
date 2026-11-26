@@ -1,12 +1,25 @@
+import asyncio
 import contextlib
 import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
+from telethon.crypto import AuthKey
+from telethon.sessions import StringSession
+
+from src import config as app_config
 from src.core import like_history, like_report
+
+
+def make_dummy_string_session() -> str:
+    session = StringSession()
+    session.set_dc(1, "149.154.175.53", 443)
+    session.auth_key = AuthKey(b"\x01" * 256)
+    return session.save()
 
 
 def sample(likes, day):
@@ -117,6 +130,73 @@ class LikeReportTests(unittest.TestCase):
         messages = like_report.render_telegram_messages(report)
         self.assertEqual(len(messages), 1)
         self.assertIn('└─ User: <a href="https://t.me/nitish1201">Nitish Kartik</a>', messages[0])
+
+    def test_resolve_and_load_string_session_case_insensitive(self):
+        test_root = Path(__file__).resolve().parent
+        with tempfile.TemporaryDirectory(dir=test_root) as temp:
+            root = Path(temp)
+            session_dir = root / "Session"
+            session_dir.mkdir(parents=True, exist_ok=True)
+            valid_session_str = make_dummy_string_session()
+            (session_dir / "nitish1.txt").write_text(valid_session_str + "\n", encoding="utf-8")
+            (session_dir / "nitish1.session").write_text("legacy", encoding="utf-8")
+
+            with patch.object(app_config, "PROJECT_ROOT", root):
+                resolved = app_config.resolve_session_path("Nitish1", prefer_yogesh_anytime=True)
+                self.assertEqual(resolved.name, "nitish1.txt")
+                loaded = app_config.load_telethon_session(resolved)
+                self.assertIsInstance(loaded, StringSession)
+                self.assertEqual(loaded.save(), valid_session_str)
+
+    def test_send_report_telegram_uses_string_session_txt(self):
+        test_root = Path(__file__).resolve().parent
+        with tempfile.TemporaryDirectory(dir=test_root) as temp:
+            root = Path(temp)
+            session_dir = root / "Session"
+            session_dir.mkdir(parents=True, exist_ok=True)
+            valid_session_str = make_dummy_string_session()
+            (session_dir / "nitish1.txt").write_text(valid_session_str, encoding="utf-8")
+
+            captured = {}
+
+            class FakeClient:
+                def __init__(self, session, api_id, api_hash):
+                    captured["session"] = session
+                    captured["api_id"] = api_id
+                    captured["api_hash"] = api_hash
+                    captured["sent"] = []
+
+                async def __aenter__(self):
+                    return self
+
+                async def __aexit__(self, exc_type, exc, tb):
+                    return False
+
+                async def is_user_authorized(self):
+                    return True
+
+                async def send_message(self, gid, text, **kwargs):
+                    captured["sent"].append((gid, text, kwargs))
+                    return SimpleNamespace(id=101)
+
+            report = {
+                "date": "2026-11-26",
+                "generated_at": "2026-11-26T05:25:00+05:30",
+                "uids": {"2876365011": {"player_name": "Mayank", "likes": 10324, "previous_likes": 10210, "daily_increase": 114}},
+            }
+            settings = {"sender_account": "Nitish1", "groups": [{"id": -1003451378152, "active": True}]}
+
+            with patch.object(app_config, "PROJECT_ROOT", root), \
+                    patch.object(app_config, "API_ID", 12345), \
+                    patch.object(app_config, "API_HASH", "hash"), \
+                    patch("telethon.TelegramClient", FakeClient), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                sent_ids = asyncio.run(like_report.send_report_telegram(report, settings, force=True))
+
+            self.assertEqual(sent_ids, [101])
+            self.assertIsInstance(captured["session"], StringSession)
+            self.assertEqual(captured["session"].save(), valid_session_str)
+            self.assertEqual(captured["sent"][0][0], -1003451378152)
 
 
 if __name__ == "__main__":

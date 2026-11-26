@@ -29,8 +29,8 @@ from src.config import (
     API_ID,
     API_HASH,
     get_config_path,
-    get_sessions_dir,
-    load_json_config
+    load_json_config,
+    resolve_session_path
 )
 from src.core.stats import BotStats
 from src.core.like_history import IST, daily_uid_summary, get_operational_date, load_history
@@ -118,7 +118,6 @@ async def main():
 
     time_slots = [s.strip() for s in args.time.split(",") if s.strip()]
     config_file = get_config_path(args.config)
-    sessions_dir = get_sessions_dir()
 
     try:
         full_data = load_json_config(config_file)
@@ -211,24 +210,7 @@ async def main():
         current_stagger = 0.0
 
         for idx, acc in enumerate(active_accounts):
-            session_name = acc["session"]
-            if not session_name.endswith(".session"):
-                session_name += ".session"
-
-            session_path = sessions_dir / session_name
-            if not session_path.exists():
-                legacy_path = PROJECT_ROOT / "Session" / session_name
-                if legacy_path.exists():
-                    session_path = legacy_path
-
-            if not session_path.exists() and "yogesh" in session_name.lower():
-                for alt in ("yogesh.session", "yogeshAnytime.session"):
-                    if (sessions_dir / alt).exists():
-                        session_path = sessions_dir / alt
-                        break
-                    elif (PROJECT_ROOT / "Session" / alt).exists():
-                        session_path = PROJECT_ROOT / "Session" / alt
-                        break
+            session_path = resolve_session_path(acc["session"])
 
             if idx > 0:
                 current_stagger += random.uniform(

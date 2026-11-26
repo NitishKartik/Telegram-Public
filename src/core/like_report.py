@@ -205,7 +205,7 @@ def render_telegram_message(report: dict) -> str:
 async def send_report_telegram(report: dict, settings: dict, force: bool = False) -> list[int]:
     """Send formatted like report cards into configured Telegram groups, one message per user."""
     from telethon import TelegramClient
-    from src.config import API_ID, API_HASH, get_sessions_dir
+    from src.config import API_ID, API_HASH, load_telethon_session, resolve_session_path
 
     if not API_ID or not API_HASH:
         raise RuntimeError("Telegram API credentials missing")
@@ -225,40 +225,13 @@ async def send_report_telegram(report: dict, settings: dict, force: bool = False
         target_group_ids = [-1003451378152]
 
     raw_sender = settings.get("sender_account", "nitish1")
-    sender_name = raw_sender if raw_sender.endswith(".session") else f"{raw_sender}.session"
-
-    session_path = get_sessions_dir() / sender_name
-    if not session_path.exists():
-        legacy_path = like_history.ROOT / "Session" / sender_name
-        if legacy_path.exists():
-            session_path = legacy_path
-
-    if not session_path.exists():
-        for s_dir in (get_sessions_dir(), like_history.ROOT / "Session"):
-            if s_dir.exists():
-                for candidate in s_dir.glob("*.session"):
-                    if candidate.name.lower() == sender_name.lower():
-                        session_path = candidate
-                        break
-            if session_path.exists():
-                break
-
-    if not session_path.exists() and "yogesh" in sender_name.lower():
-        for alt in ("yogeshAnytime.session", "yogesh.session"):
-            for s_dir in (get_sessions_dir(), like_history.ROOT / "Session"):
-                if (s_dir / alt).exists():
-                    session_path = s_dir / alt
-                    break
-            if session_path.exists():
-                break
-
-    if not session_path.exists():
-        raise FileNotFoundError(f"Session file not found: {session_path}")
+    session_path = resolve_session_path(raw_sender, prefer_yogesh_anytime=True)
+    session_source = load_telethon_session(session_path)
 
     messages = render_telegram_messages(report)
     sent_ids = []
 
-    async with TelegramClient(str(session_path), API_ID, API_HASH) as client:
+    async with TelegramClient(session_source, API_ID, API_HASH) as client:
         if not await client.is_user_authorized():
             raise RuntimeError(f"Session {session_path.name} is no longer authorized")
         for gid in target_group_ids:
